@@ -3,7 +3,20 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
-
+@theme default {
+  --color-primary-color: #ffffff;
+  --color-background-color: #f2f4f7;
+  --color-secondary-color: #e6c258;
+  --color-base-color: #111827;
+  --color-anchor-color: #e6c258;
+  --color-highlight-color: #eaecfe;
+  --color-lighter-color: #797979;
+  --color-input-color: #efefef;
+  --color-error-color: #e53935;
+  --color-success-color: #16a249;
+  --color-warning-color: #f59f0a;
+  --animate-border: border 4s linear infinite;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
