@@ -1,25 +1,20 @@
-import { AppSidebar } from "@/components/shared/app-sidebar";
-import Topbar from "@/components/shared/Topbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Sidebar } from "@/components/shared/Sidebar";
+import Topbar from "@/components/shared/Topbar";
+import { RightRail } from "@/components/shared/RightRail";
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <div>
-            <SidebarProvider>
-                <AppSidebar />
-                <main className="w-full min-w-0 relative">
-                    <div className="p-4 flex items-center justify-between gap-4 border-b w-full bg-background z-10 sticky! top-0">
-                        <Topbar />
-                    </div>
-                    <div className="">
-                        <div className="bg-secondary-color w-full">
-                            <div>{children}</div>
-                        </div>
-                    </div>
-                </main>
-            </SidebarProvider>
-
-        </div>
+        <SidebarProvider>
+            <Sidebar />
+            <div className="flex min-w-0 flex-1 flex-col">
+                <Topbar />
+                <div className="flex min-w-0 flex-1 bg-background-color">
+                    <main className="min-w-0 flex-1">{children}</main>
+                    <RightRail />
+                </div>
+            </div>
+        </SidebarProvider>
     );
 };
 

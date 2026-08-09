@@ -3,7 +3,26 @@
     "allow": [
       "Bash(npx eslint *)",
       "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('gsap:', p.dependencies?.gsap || p.devDependencies?.gsap\\); console.log\\('@gsap/react:', p.dependencies?.['@gsap/react'] || p.devDependencies?.['@gsap/react']\\); console.log\\('framer-motion:', p.dependencies?.['framer-motion'] || p.devDependencies?.['framer-motion']\\); console.log\\('motion:', p.dependencies?.['motion'] || p.devDependencies?.['motion']\\);\")",
-      "Bash(awk '/nav-group\\\\.tsx/{show=1} show{print} /^$/{show=0}')"
+      "Bash(awk '/nav-group\\\\.tsx/{show=1} show{print} /^$/{show=0}')",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.scripts, null, 2\\)\\)\")",
+      "Bash(curl -sf http://localhost:3000)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(timeout 100 npx -y playwright@1.62.1 --version)",
+      "Bash(timeout 180 npx -y playwright@1.62.1 install chromium --with-deps)",
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=0 node \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/07b9bfaf-707d-44e1-99aa-09783df1a6a6/scratchpad/screenshot.js\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/07b9bfaf-707d-44e1-99aa-09783df1a6a6/scratchpad/home.png\")",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node screenshot.js home.png)",
+      "Bash(node debug.js)",
+      "Bash(node screenshot.js home2.png)",
+      "Bash(node debug2.js)",
+      "Bash(node screenshot.js final.png)",
+      "Bash(node responsive.js)",
+      "Bash(node interact.js)",
+      "Bash(node scrolltest.js)",
+      "Bash(node logodebug.js)",
+      "Bash(node -e \"console.log\\(require\\('./package.json'\\).dependencies.react\\)\")",
+      "Bash(node tablet-open.js)"
     ]
   }
 }

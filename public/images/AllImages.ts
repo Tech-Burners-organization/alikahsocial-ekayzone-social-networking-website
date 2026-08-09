@@ -1,4 +1,5 @@
 import logo from "./logo.png";
+import logoIcon from "./logoIcon.png";
 
 // Main Images
 
@@ -8,6 +9,7 @@ import cover from "./dummyCover.jpg";
 
 export const AllImages = {
   logo,
+  logoIcon,
   profile,
   cover,
 };
