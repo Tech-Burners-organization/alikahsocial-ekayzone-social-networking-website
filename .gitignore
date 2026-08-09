@@ -44,3 +44,6 @@ next-env.d.ts
 .vscode
 .claude
 project_structure.md
+AGENTS.md
+CLAUDE.md
+.claude
