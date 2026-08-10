@@ -142,6 +142,8 @@ export default function ReelsSection() {
         };
     }, []);
 
+    console.log(feed)
+
     return (
         <main
             ref={containerRef}

@@ -1,7 +1,7 @@
 // components/VideoPlayer.tsx
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 interface VideoPlayerProps {
     src: string;
@@ -16,10 +16,12 @@ interface VideoPlayerProps {
     onVolumeChange: (volume: number) => void;
 }
 
-export default function VideoPlayer({ src, username, caption, likes, comments, shares, isMuted, onMuteChange, volume, onVolumeChange }: VideoPlayerProps) {
+function VideoPlayer({ src, username, caption, likes, comments, shares, isMuted, onMuteChange, volume, onVolumeChange }: VideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null);
     const wasPlayingBeforeSeekRef = useRef(false);
+    const iconTimeoutRef = useRef<number | null>(null);
+    const seekRafRef = useRef<number | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [showVolumeControl, setShowVolumeControl] = useState(false);
     const [showPlaybackIcon, setShowPlaybackIcon] = useState(false);
@@ -60,6 +62,13 @@ export default function VideoPlayer({ src, username, caption, likes, comments, s
     }, [isMuted, volume]);
 
     useEffect(() => {
+        return () => {
+            if (iconTimeoutRef.current !== null) window.clearTimeout(iconTimeoutRef.current);
+            if (seekRafRef.current !== null) cancelAnimationFrame(seekRafRef.current);
+        };
+    }, []);
+
+    useEffect(() => {
         const videoElement = videoRef.current;
         if (!videoElement) return;
 
@@ -90,8 +99,15 @@ export default function VideoPlayer({ src, username, caption, likes, comments, s
         const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
         const nextTime = ratio * duration;
 
-        setCurrentTime(nextTime);
-        videoElement.currentTime = nextTime;
+        setCurrentTime(nextTime); // Immediate visual feedback for the thumb/fill
+
+        // Coalesce rapid pointermove events into one actual seek per frame,
+        // since assigning currentTime forces the decoder to a keyframe each time.
+        if (seekRafRef.current !== null) cancelAnimationFrame(seekRafRef.current);
+        seekRafRef.current = requestAnimationFrame(() => {
+            videoElement.currentTime = nextTime;
+            seekRafRef.current = null;
+        });
     };
 
     const handleProgressPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -142,9 +158,12 @@ export default function VideoPlayer({ src, username, caption, likes, comments, s
         }
 
         setShowPlaybackIcon(true);
-        window.clearTimeout((window as Window & { __reelsIconTimeout?: number }).__reelsIconTimeout);
-        (window as Window & { __reelsIconTimeout?: number }).__reelsIconTimeout = window.setTimeout(() => {
+        if (iconTimeoutRef.current !== null) {
+            window.clearTimeout(iconTimeoutRef.current);
+        }
+        iconTimeoutRef.current = window.setTimeout(() => {
             setShowPlaybackIcon(false);
+            iconTimeoutRef.current = null;
         }, 800);
     };
 
@@ -191,6 +210,7 @@ export default function VideoPlayer({ src, username, caption, likes, comments, s
                     loop
                     muted={isMuted}
                     playsInline
+                    preload="metadata"
                 />
 
                 {/* --- SEEK BAR (Instagram-style drag-to-scrub progress track) --- */}
@@ -359,3 +379,5 @@ export default function VideoPlayer({ src, username, caption, likes, comments, s
         </section>
     );
 }
+
+export default memo(VideoPlayer);
