@@ -30,86 +30,86 @@ export function RightRail() {
     <>
       {/* Flow placeholder — the rail itself is fixed, so this reserves its width */}
       <div className="hidden w-80 shrink-0 lg:block" aria-hidden />
-      <aside className="fixed top-16 right-0 bottom-0 z-10 hidden w-80 flex-col gap-6 overflow-y-auto border-l border-slate-100 bg-white px-5 py-6 lg:flex">
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
-        <Input
-          placeholder="Search post, creators, topics"
-          className="h-11 rounded-full border-none bg-input-color pl-10 text-sm"
-        />
-      </div>
-
-      <section>
-        <h2 className="mb-3 text-lg font-bold text-base-color">Top Creators</h2>
-        <div className="flex flex-col gap-4">
-          {TOP_CREATORS.map((creator) => (
-            <div key={creator.handle} className="flex items-center gap-3">
-              <Avatar size="lg">
-                <AvatarImage src={AllImages.profile.src} alt={creator.name} />
-                <AvatarFallback>{creator.name[0]}</AvatarFallback>
-              </Avatar>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-base-color">
-                  {creator.name}
-                </p>
-                <p className="truncate text-xs text-lighter-color">
-                  {creator.handle}
-                </p>
-              </div>
-              <FollowButton />
-            </div>
-          ))}
+      <aside className="fixed top-14 right-0 bottom-0 z-10 hidden w-80 flex-col gap-6 overflow-y-auto scrollbar-none  border-l border-slate-100 bg-white px-5 py-6 lg:flex">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
+          <Input
+            placeholder="Search post, creators, topics"
+            className="h-11 rounded-full border-none bg-input-color pl-10 text-sm"
+          />
         </div>
-      </section>
 
-      <section>
-        <h2 className="mb-3 text-lg font-bold text-base-color">Trending Now</h2>
-        <div className="flex flex-col">
-          {TRENDING_TOPICS.map((topic, index) => (
-            <div
-              key={topic.tag}
-              className="border-b border-slate-100 py-3 last:border-b-0"
-            >
-              <p className="text-xs font-medium text-lighter-color">
-                {index + 1}. Trending
-              </p>
-              <p className="text-[15px] font-bold text-base-color">{topic.tag}</p>
-              <p className="text-xs text-lighter-color">{topic.count} videos</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <section>
+          <h2 className="mb-3 text-lg font-bold text-base-color">Top Creators</h2>
+          <div className="flex flex-col gap-4">
+            {TOP_CREATORS.map((creator) => (
+              <div key={creator.handle} className="flex items-center gap-3">
+                <Avatar size="lg">
+                  <AvatarImage src={AllImages.profile.src} alt={creator.name} />
+                  <AvatarFallback>{creator.name[0]}</AvatarFallback>
+                </Avatar>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-base-color">
+                    {creator.name}
+                  </p>
+                  <p className="truncate text-xs text-lighter-color">
+                    {creator.handle}
+                  </p>
+                </div>
+                <FollowButton />
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <section>
-        <h2 className="mb-3 text-lg font-bold text-base-color">
-          Trending Products
-        </h2>
-        <div className="flex flex-col gap-4">
-          {TRENDING_PRODUCTS.map((product) => (
-            <div key={product.name} className="flex items-center gap-3">
-              <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-slate-100">
-                <Image
-                  src={AllImages.cover}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
+        <section>
+          <h2 className="mb-3 text-lg font-bold text-base-color">Trending Now</h2>
+          <div className="flex flex-col">
+            {TRENDING_TOPICS.map((topic, index) => (
+              <div
+                key={topic.tag}
+                className="border-b border-slate-100 py-3 last:border-b-0"
+              >
+                <p className="text-xs font-medium text-lighter-color">
+                  {index + 1}. Trending
+                </p>
+                <p className="text-[15px] font-bold text-base-color">{topic.tag}</p>
+                <p className="text-xs text-lighter-color">{topic.count} videos</p>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-base-color">
-                  {product.name}
-                </p>
-                <p className="truncate text-xs text-lighter-color">
-                  {product.shop}
-                </p>
-                <p className="text-sm font-bold text-secondary-color">
-                  {product.price}
-                </p>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-lg font-bold text-base-color">
+            Trending Products
+          </h2>
+          <div className="flex flex-col gap-4">
+            {TRENDING_PRODUCTS.map((product) => (
+              <div key={product.name} className="flex items-center gap-3">
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+                  <Image
+                    src={AllImages.cover}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-base-color">
+                    {product.name}
+                  </p>
+                  <p className="truncate text-xs text-lighter-color">
+                    {product.shop}
+                  </p>
+                  <p className="text-sm font-bold text-secondary-color">
+                    {product.price}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
       </aside>
     </>
   );

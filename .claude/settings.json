@@ -22,7 +22,19 @@
       "Bash(node scrolltest.js)",
       "Bash(node logodebug.js)",
       "Bash(node -e \"console.log\\(require\\('./package.json'\\).dependencies.react\\)\")",
-      "Bash(node tablet-open.js)"
+      "Bash(node tablet-open.js)",
+      "Bash(node collapse-test.js)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/next/package.json'\\).version\\)\")",
+      "Bash(chromium-cli --help)",
+      "Bash(npm ls *)",
+      "Bash(timeout 180 npx -y playwright@1.62.1 install chromium)",
+      "Bash(timeout 60 bash -c 'until curl -sf http://localhost:3000 >/dev/null; do sleep 1; done')",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node -e \"console.log\\(require.resolve\\('playwright'\\)\\)\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\seekbar_test.js\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\seekbar_test2.js\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\seekbar_zoom.js\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\mute_zoom.js\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\mute_persist_test.js\")"
     ]
   }
 }

@@ -42,7 +42,7 @@ export function Sidebar() {
           <Image
             src={AllImages.logo}
             alt="eKayzone"
-            className="h-9 w-auto group-data-[collapsible=icon]:hidden"
+            className="h-auto w-[90%] group-data-[collapsible=icon]:hidden"
             priority
           />
           <Image
