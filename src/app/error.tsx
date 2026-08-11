@@ -1,4 +1,6 @@
-"use client"; // Error boundaries must be Client Components
+"use client";
+
+// Error boundaries must be Client Components
 
 import { useEffect } from "react";
 import { AlertTriangle, RotateCcw, Mail } from "lucide-react";
@@ -20,7 +22,7 @@ export default function Error({
     const body = encodeURIComponent(
       `Error: ${error.message}\nDigest: ${error.digest || "N/A"}`
     );
-    window.location.href = `mailto:cvak@frafol.sk?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:support@yourcompany.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -32,12 +34,12 @@ export default function Error({
           <div className="absolute inset-0 opacity-5">
             <div
               className="absolute -top-4 -right-4 w-24 h-24 rounded-full"
-              style={{ backgroundColor: "#ad2b08" }}
-            ></div>
+              style={{ backgroundColor: "#10b981" }}
+            />
             <div
               className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full"
-              style={{ backgroundColor: "#ad2b08" }}
-            ></div>
+              style={{ backgroundColor: "#10b981" }}
+            />
           </div>
 
           {/* Content */}
@@ -45,26 +47,23 @@ export default function Error({
             {/* Error Icon */}
             <div
               className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6"
-              style={{ backgroundColor: "#ad2b08", opacity: 0.1 }}
+              style={{ backgroundColor: "#10b981", opacity: 0.1 }}
             >
               <AlertTriangle
                 className="w-10 h-10"
-                style={{ color: "#ad2b08" }}
+                style={{ color: "#10b981" }}
               />
             </div>
 
             {/* Main Heading */}
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              {/* Oops! Something went wrong */}
-              Ups! Niečo sa pokazilo
+              Oops! Something went wrong
             </h1>
 
             {/* Error Message */}
             <p className="text-gray-600 mb-2 leading-relaxed">
-              {/* We encountered an unexpected error. Don't worry, our team has
-                  been notified and we're working to fix it. */}
-              Vyskytla sa neočakávaná chyba, ale nebojte sa, náš tím bol
-              upozornený a pracuje na jej odstránení.
+              We encountered an unexpected error. Don&apos;t worry, our team has
+              been notified and we&apos;re working to fix it.
             </p>
 
             {/* Error Details (for development) */}
@@ -87,35 +86,37 @@ export default function Error({
               <button
                 onClick={reset}
                 className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
-                style={{ backgroundColor: "#ad2b08" }}
+                style={{ backgroundColor: "#10b981" }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#8a2206")
+                  (e.currentTarget.style.backgroundColor = "#10b981")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#ad2b08")
+                  (e.currentTarget.style.backgroundColor = "#10b981")
                 }
               >
                 <RotateCcw className="w-4 h-4" />
-                {/* Try Again */}
-                Skúsiť znova
+                Try Again
               </button>
             </div>
 
             {/* Contact Support */}
             <div className="mt-8 pt-6 border-t border-gray-200">
               <p className="text-sm text-gray-500 mb-3">
-                {/* Still having trouble? */}
-                Stále to nefunguje?
+                Still having trouble?
               </p>
               <button
                 onClick={handleContact}
                 className="font-medium text-sm transition-colors duration-200 flex items-center justify-center gap-1 mx-auto cursor-pointer"
-                style={{ color: "#ad2b08" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#8a2206")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#ad2b08")}
+                style={{ color: "#10b981" }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#10b981")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "#10b981")
+                }
               >
                 <Mail className="w-4 h-4" />
-                cvak@frafol.sk
+                Contact Support
               </button>
             </div>
           </div>
@@ -126,7 +127,8 @@ export default function Error({
           <p className="text-white/60 text-sm">
             {error.digest && (
               <>
-                Error ID: <span className="font-mono">{error.digest}</span>
+                Error ID:{" "}
+                <span className="font-mono">{error.digest}</span>
               </>
             )}
           </p>
