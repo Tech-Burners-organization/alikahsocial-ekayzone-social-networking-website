@@ -93,6 +93,7 @@ export function RightRail() {
                     alt={product.name}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 80px"
                   />
                 </div>
                 <div className="min-w-0 flex-1">
