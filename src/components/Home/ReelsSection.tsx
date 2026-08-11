@@ -2,60 +2,20 @@
 'use client';
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import VideoPlayer from '../shared/VideoPlayer';
-
-interface FeedItem {
-    id: string;
-    url: string;
-    username: string;
-    caption: string;
-    likes: string;
-    comments: string;
-    shares: string;
-}
-
-// Content cycles through these templates forever. Swap getReelAt's body for a real
-// paginated fetch keyed by index once the backend serves unique per-reel content —
-// the sliding-window mounting below stays valid either way.
-const REEL_TEMPLATES: Omit<FeedItem, 'id'>[] = [
-    {
-        url: './video/video1.mp4',
-        username: 'learn_with_thandi',
-        caption: "Grade 12 Math's made easy! Part 1 📐 #LearnWithMe #Education",
-        likes: '1.2K',
-        comments: '124',
-        shares: '1.2K'
-    },
-    {
-        url: './video/video2.mp4',
-        username: 'animation_hub',
-        caption: 'Testing standard landscape aspect ratio tracking natively in your UI framework 🐰',
-        likes: '4.8K',
-        comments: '312',
-        shares: '840'
-    },
-    {
-        url: './video/video3.mp4',
-        username: 'tech_reviews',
-        caption: 'Auto-play testing and interactive tap actions running perfectly! ⚡',
-        likes: '822',
-        comments: '45',
-        shares: '109'
-    }
-];
-
-const getReelAt = (index: number): FeedItem => ({
-    id: `reel-${index}`,
-    ...REEL_TEMPLATES[index % REEL_TEMPLATES.length]
-});
+import VideoPlayer, { type VideoPlayerControls } from '../shared/VideoPlayer';
+import { FeedTabs, type FeedTab } from '../shared/reels/FeedTabs';
+import { ReelSkeleton } from '../shared/reels/ReelSkeleton';
+import { useFeedWindow } from '../shared/reels/useFeedWindow';
 
 const NAVIGATION_SETTLE_MS = 700; // Matches the native smooth-scroll duration for one viewport
 
 export default function ReelsSection() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [activeTab, setActiveTab] = useState<FeedTab>('for-you');
     const [isMuted, setIsMuted] = useState(true);
     const [volume, setVolume] = useState(0.8);
     const containerRef = useRef<HTMLElement>(null);
+    const activeControlsRef = useRef<VideoPlayerControls>(null);
     const startYRef = useRef<number | null>(null);
     const deltaYRef = useRef(0);
     const navigationLockRef = useRef(false);
@@ -67,6 +27,8 @@ export default function ReelsSection() {
     const windowStart = Math.max(0, activeIndex - 1);
     const mountedIndices = [windowStart, windowStart + 1, windowStart + 2];
     const activePositionInWindow = activeIndex - windowStart;
+
+    const { getItemAt } = useFeedWindow(mountedIndices);
 
     // When the window shifts (a reel enters/leaves), the DOM reorders and the
     // current item's offset within the container changes even though nothing
@@ -117,6 +79,25 @@ export default function ReelsSection() {
         }, NAVIGATION_SETTLE_MS);
     }, []);
 
+    const handleTabChange = (tab: FeedTab) => {
+        if (tab === activeTab) return;
+        setActiveTab(tab);
+
+        if (navigationTimeoutRef.current) {
+            window.clearTimeout(navigationTimeoutRef.current);
+            navigationTimeoutRef.current = null;
+        }
+        navigationLockRef.current = false;
+        activeIndexRef.current = 0;
+        setActiveIndex(0);
+
+        // The recenter effect only fires when the mounted window itself shifts,
+        // which it won't if we were already at index 0 or 1 (windowStart stays 0
+        // either way) — reset the scroll position directly so switching tabs
+        // always jumps back to the top.
+        if (containerRef.current) containerRef.current.scrollTop = 0;
+    };
+
     const handleSwipeStart = (clientY: number) => {
         startYRef.current = clientY;
         deltaYRef.current = 0;
@@ -157,6 +138,23 @@ export default function ReelsSection() {
         return () => container.removeEventListener('wheel', handleWheel);
     }, [navigateByDirection]);
 
+    // Spacebar toggles play/pause on whichever reel is currently active, unless
+    // focus is inside a text field (e.g. the comments sheet's input).
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.code !== 'Space') return;
+
+            const target = event.target as HTMLElement | null;
+            if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable) return;
+
+            event.preventDefault();
+            activeControlsRef.current?.togglePlayback();
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     useEffect(() => {
         return () => {
             if (navigationTimeoutRef.current) {
@@ -166,31 +164,32 @@ export default function ReelsSection() {
     }, []);
 
     return (
-        <main
-            ref={containerRef}
-            onTouchStart={(event) => handleSwipeStart(event.touches[0]?.clientY ?? 0)}
-            onTouchMove={(event) => handleSwipeMove(event.touches[0]?.clientY ?? 0)}
-            onTouchEnd={handleSwipeEnd}
-            className="h-full w-full overflow-y-auto overflow-x-hidden touch-pan-y scroll-smooth snap-y snap-mandatory bg-zinc-950 scrollbar-none"
-        >
-            {mountedIndices.map((index) => {
-                const item = getReelAt(index);
-                return (
-                    <VideoPlayer
-                        key={item.id}
-                        src={item.url}
-                        username={item.username}
-                        caption={item.caption}
-                        likes={item.likes}
-                        comments={item.comments}
-                        shares={item.shares}
-                        isMuted={isMuted}
-                        onMuteChange={setIsMuted}
-                        volume={volume}
-                        onVolumeChange={setVolume}
-                    />
-                );
-            })}
-        </main>
+        <>
+            <FeedTabs activeTab={activeTab} onTabChange={handleTabChange} />
+            <main
+                ref={containerRef}
+                onTouchStart={(event) => handleSwipeStart(event.touches[0]?.clientY ?? 0)}
+                onTouchMove={(event) => handleSwipeMove(event.touches[0]?.clientY ?? 0)}
+                onTouchEnd={handleSwipeEnd}
+                className="h-full w-full overflow-y-auto overflow-x-hidden touch-pan-y scroll-smooth snap-y snap-mandatory bg-zinc-950 scrollbar-none"
+            >
+                {mountedIndices.map((index) => {
+                    const item = getItemAt(index);
+                    if (!item) return <ReelSkeleton key={`skeleton-${index}`} />;
+
+                    return (
+                        <VideoPlayer
+                            key={item.id}
+                            ref={index === activeIndex ? activeControlsRef : null}
+                            item={item}
+                            isMuted={isMuted}
+                            onMuteChange={setIsMuted}
+                            volume={volume}
+                            onVolumeChange={setVolume}
+                        />
+                    );
+                })}
+            </main>
+        </>
     );
 }
