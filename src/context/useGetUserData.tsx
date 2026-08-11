@@ -1,14 +1,14 @@
-import { ISignInUser } from "@/types";
+import { IJwtPayload } from "@/types";
 import { decodedToken } from "@/utils/jwt";
 import Cookies from "js-cookie";
 
-export const useGetUserData = (): ISignInUser | null => {
-    const token = Cookies.get("bsw_access_token");
+export const useGetUserData = (): IJwtPayload | null => {
+    const token = Cookies.get("ekayzone_access_token");
 
     if (!token) return null;
 
     try {
-        const userData = decodedToken(token) as ISignInUser;
+        const userData = decodedToken(token) as IJwtPayload;
         return userData;
     } catch (error) {
         console.error("Invalid token", error);
