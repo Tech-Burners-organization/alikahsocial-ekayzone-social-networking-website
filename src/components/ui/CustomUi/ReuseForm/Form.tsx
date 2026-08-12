@@ -164,8 +164,8 @@ export const FormInput: FormControlFunc<{
   );
 };
 
-export const FormTextarea: FormControlFunc<{ prefix?: ReactNode; suffix?: ReactNode; inputClassName?: string }> = (props) => {
-  const { prefix, suffix, inputClassName, ...restProps } = props;
+export const FormTextarea: FormControlFunc<{ prefix?: ReactNode; suffix?: ReactNode; placeholder?: string; inputClassName?: string }> = (props) => {
+  const { prefix, suffix, placeholder, inputClassName, ...restProps } = props;
 
   return (
     <FormBase {...restProps}>
@@ -183,6 +183,7 @@ export const FormTextarea: FormControlFunc<{ prefix?: ReactNode; suffix?: ReactN
               suffix && "pr-10",
               inputClassName
             )}
+            placeholder={placeholder}
             {...field}
           />
           {suffix && (

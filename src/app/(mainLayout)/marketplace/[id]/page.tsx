@@ -63,7 +63,7 @@ export default async function ProductDetailsPage({ params }: PageProps<'/marketp
                     </div>
                 </div>
             </Container>
-            <BuyNowBar productTitle={product.title} />
+            <BuyNowBar productId={product.id} />
         </div>
     );
 }

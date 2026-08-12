@@ -126,13 +126,20 @@
       "Bash(node test-gallery-debug.js)",
       "Bash(node test-swipe.js)",
       "Bash(node test-lightbox-viewport.js)",
-      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\")"
+      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\")",
+      "Bash(mkdir -p \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website/src/app/\\(mainLayout\\)/marketplace/[id]/checkout/_components\")",
+      "Bash(mkdir -p \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website/src/app/\\(mainLayout\\)/marketplace/[id]/checkout/_lib\")",
+      "Bash(node test-checkout.js)",
+      "Bash(sed -i \"s/R1200/R1,200/g; s/R2400/R2,400/g\" test-checkout.js)",
+      "Bash(cd \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website\" && sed -i 's/size-\\\\[26px\\\\]/size-6.5/g' \"src/app/\\(mainLayout\\)/marketplace/[id]/checkout/_components/OrderSummaryStep.tsx\")",
+      "Bash(node test-empty-submit.js)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
       "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile\\[username]",
       "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\_components",
-      "C:\\Users\\Din\\AppData\\Local\\Temp\\claude\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\859b430c-dcfb-48c4-8cfa-ff37faf0a196\\scratchpad\\node_modules"
+      "C:\\Users\\Din\\AppData\\Local\\Temp\\claude\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\859b430c-dcfb-48c4-8cfa-ff37faf0a196\\scratchpad\\node_modules",
+      "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\checkout\\_components"
     ]
   }
 }
