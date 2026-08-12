@@ -1,8 +1,8 @@
+import ProductCard from "@/components/shared/marketplace/ProductCard";
 import { getFilteredProducts, type SortOption } from "../_lib/data";
 import MarketplaceSearchBar from "./MarketplaceSearchBar";
 import CategoryPills from "./CategoryPills";
 import SortDropdown from "./SortDropdown";
-import ProductCard from "./ProductCard";
 
 export default function ProductsPanel({
     search,

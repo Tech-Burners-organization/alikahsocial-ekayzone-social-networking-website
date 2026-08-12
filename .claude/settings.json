@@ -140,7 +140,11 @@
       "Bash(mkdir -p \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website/src/app/\\(mainLayout\\)/explore/hashtag/[tag]\")",
       "Bash(node test-explore.js)",
       "Bash(node test-explore-images.js)",
-      "Bash(node test-forgot-password.js)"
+      "Bash(node test-forgot-password.js)",
+      "Bash(node test-final.js)",
+      "Bash(sed -i \"s/waitUntil: 'networkidle'/waitUntil: 'domcontentloaded'/g\" test-final.js)",
+      "Bash(node test-forgot-fix.js)",
+      "Bash(node test-otp-overflow.js)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",

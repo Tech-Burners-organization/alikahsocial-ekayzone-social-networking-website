@@ -1,60 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { BadgeCheck, Heart, Images, MessageCircle, Play, Radio } from "lucide-react";
+import { BadgeCheck, Heart, Images, MessageCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FollowButton } from "@/components/shared/FollowButton";
+import { VideoGrid } from "@/components/shared/reels/VideoGrid";
 import { formatCompactNumber } from "@/lib/format";
-import type { CreatorProfile, ProfileThumbnail } from "@/components/shared/reels/types";
-import { AllImages } from "@/../public/images/AllImages";
-import Image from "next/image";
+import type { CreatorProfile } from "@/components/shared/reels/types";
 
 interface ProfilePageContentProps {
     profile: CreatorProfile;
-}
-
-function ThumbnailGrid({ items, userName }: { items: ProfileThumbnail[]; userName: string }) {
-    if (items.length === 0) {
-        return (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
-                <div className="mb-4 flex size-16 items-center justify-center rounded-full bg-muted">
-                    <Play className="size-6 text-muted-foreground/50" />
-                </div>
-                <p className="text-sm font-medium text-muted-foreground">No posts yet</p>
-            </div>
-        );
-    }
-
-    return (
-        <div className="grid grid-cols-3 gap-1">
-            {items.map((item) => (
-                <Link
-                    key={item.id}
-                    href={`/profile/${userName}/watch`}
-                    className="relative overflow-hidden bg-muted group aspect-9/12 rounded-md"
-                >
-                    <Image
-                        src={item.thumbnailUrl}
-                        alt=""
-                        width={1000}
-                        height={1000}
-                        className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    {item.isLive && (
-                        <span className="absolute left-1.5 top-1.5 flex items-center gap-0.5 rounded bg-rose-500 px-1.5 py-0.5 text-[10px] font-bold text-white leading-none">
-                            <Radio className="size-2.5" />
-                            LIVE
-                        </span>
-                    )}
-                    <span className="absolute bottom-1.5 right-1.5 flex items-center gap-0.5 text-[10px] font-semibold text-white drop-shadow-md bg-black/30 rounded px-1 py-0.5 backdrop-blur-sm">
-                        <Play className="size-2.5 fill-white" />
-                        {formatCompactNumber(item.views)}
-                    </span>
-                </Link>
-            ))}
-        </div>
-    );
 }
 
 export default function ProfilePageContent({ profile }: ProfilePageContentProps) {
@@ -147,9 +102,10 @@ export default function ProfilePageContent({ profile }: ProfilePageContentProps)
             </div>
 
             {/* ─── Content Grid ─────────────────────────── */}
-            <ThumbnailGrid
+            <VideoGrid
                 items={activeTab === "videos" ? profile.videos : profile.likedVideos}
-                userName={profile.userName}
+                href={`/profile/${profile.userName}/watch`}
+                columnsClassName="grid-cols-3"
             />
         </div>
     );

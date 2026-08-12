@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { FormPassword } from "@/components/ui/CustomUi/ReuseForm/Form";
-import { changePassword } from "@/service/AuthService/AuthServiceAPi";
+// TODO: re-enable once the real auth API call below is uncommented.
+// import { changePassword } from "@/service/AuthService/AuthServiceAPi";
 import { newPasswordSchema, type NewPasswordFormValues } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
 
@@ -21,7 +22,10 @@ export default function NewPasswordView() {
     const onSubmit = async (values: NewPasswordFormValues) => {
         setIsSubmitting(true);
         try {
-            const result = await changePassword({ body: values });
+            // TODO: re-enable real auth API call once ready.
+            // const result = await changePassword({ body: values });
+            console.log("[NewPasswordView] change password submit", values);
+            const result = { success: true, message: "" };
             if (result?.success) {
                 setView("password-updated");
             } else {

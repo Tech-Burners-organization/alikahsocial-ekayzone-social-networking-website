@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { Hash } from "lucide-react";
 import BackToPreviousPage from "@/utils/BackToPreviousPage";
+import { VideoGrid } from "@/components/shared/reels/VideoGrid";
 import { getHashtagByTag, getDiscoverThumbnails } from "../../_lib/data";
-import VideoGrid from "../../_components/VideoGrid";
 
 export default async function ExploreHashtagPage({ params }: PageProps<"/explore/hashtag/[tag]">) {
     const { tag } = await params;
@@ -33,7 +33,7 @@ export default async function ExploreHashtagPage({ params }: PageProps<"/explore
 
             <div className="flex flex-col gap-3">
                 <h2 className="text-lg font-bold text-foreground">Posts</h2>
-                <VideoGrid items={items} />
+                <VideoGrid items={items} href="/explore/watch" />
             </div>
         </div>
     );

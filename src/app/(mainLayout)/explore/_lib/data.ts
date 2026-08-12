@@ -1,4 +1,5 @@
 import { AllImages } from "../../../../../public/images/AllImages";
+import type { ProfileThumbnail } from "@/components/shared/reels/types";
 
 export interface ExploreCategory {
     id: string;
@@ -42,12 +43,6 @@ export function getHashtagByTag(tag: string): TrendingHashtag | undefined {
     return TRENDING_HASHTAGS.find((hashtag) => hashtag.tag.toLowerCase() === tag.toLowerCase());
 }
 
-export interface DiscoverThumbnail {
-    id: string;
-    thumbnailUrl: string;
-    views: number;
-}
-
 // Deterministic pseudo-random count in [min, max], stable per index — mirrors
 // the same approach used for reels/profile thumbnails (no Math.random so
 // server/client output always agrees).
@@ -57,7 +52,7 @@ function stableCount(index: number, min: number, max: number): number {
     return Math.round(min + pseudoRandom * span);
 }
 
-export function getDiscoverThumbnails(seed: number, count = 6): DiscoverThumbnail[] {
+export function getDiscoverThumbnails(seed: number, count = 6): ProfileThumbnail[] {
     return Array.from({ length: count }, (_, i) => ({
         id: `discover-${seed}-${i}`,
         thumbnailUrl: AllImages.cover.src,

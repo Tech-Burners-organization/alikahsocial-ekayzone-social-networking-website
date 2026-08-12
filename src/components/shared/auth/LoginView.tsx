@@ -56,8 +56,8 @@ export default function LoginView() {
                     <FormCheckbox control={control} name="rememberMe" label="Remember me" />
                     <button
                         type="button"
-                        onClick={() => toast.info("Password reset is coming soon")}
-                        className="text-sm font-bold text-secondary-color"
+                        onClick={() => setView("forgot-password")}
+                        className="shrink-0 whitespace-nowrap text-sm font-bold text-secondary-color"
                     >
                         Forgot password?
                     </button>

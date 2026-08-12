@@ -1,5 +1,5 @@
 import type { Product } from "../../_lib/data";
-import ProductCard from "../../_components/ProductCard";
+import ProductCard from "@/components/shared/marketplace/ProductCard";
 
 export default function RelatedProducts({ products }: { products: Product[] }) {
     if (products.length === 0) return null;

@@ -1,7 +1,7 @@
+import { VideoGrid } from "@/components/shared/reels/VideoGrid";
 import { getDiscoverThumbnails } from "./_lib/data";
 import CategoryGrid from "./_components/CategoryGrid";
 import TrendingList from "./_components/TrendingList";
-import VideoGrid from "./_components/VideoGrid";
 
 export default function ExplorePage() {
     const discoverItems = getDiscoverThumbnails(0);
@@ -15,7 +15,7 @@ export default function ExplorePage() {
 
             <div className="flex flex-col gap-3">
                 <h2 className="text-2xl font-bold text-[#0a2c07]">Discover</h2>
-                <VideoGrid items={discoverItems} />
+                <VideoGrid items={discoverItems} href="/explore/watch" />
             </div>
         </div>
     );

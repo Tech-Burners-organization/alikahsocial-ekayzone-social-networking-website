@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import type { Product } from "../_lib/data";
+import type { Product } from "@/app/(mainLayout)/marketplace/_lib/data";
 
 export default function ProductCard({ product }: { product: Product }) {
     return (
