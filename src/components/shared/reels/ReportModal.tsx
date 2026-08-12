@@ -12,7 +12,7 @@ interface ReportModalProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     targetUsername: string;
-    target: 'video' | 'profile';
+    target: 'video' | 'profile' | 'chat';
 }
 
 export function ReportModal({ open, onOpenChange, targetUsername, target }: ReportModalProps) {
@@ -31,8 +31,8 @@ export function ReportModal({ open, onOpenChange, targetUsername, target }: Repo
         onOpenChange(false);
     };
 
-    const title = target === 'video' ? 'Report Video' : 'Report Profile';
-    const subject = target === 'video' ? 'this video' : `@${targetUsername}`;
+    const title = target === 'video' ? 'Report Video' : target === 'chat' ? 'Report Conversation' : 'Report Profile';
+    const subject = target === 'video' ? 'this video' : target === 'chat' ? 'this conversation' : `@${targetUsername}`;
 
     return (
         <ReusableModal
@@ -71,7 +71,7 @@ export function ReportModal({ open, onOpenChange, targetUsername, target }: Repo
                     <Textarea
                         value={details}
                         onChange={(event) => setDetails(event.target.value)}
-                        placeholder={`Describe the reason for reporting ${target === 'video' ? 'this video' : 'this profile'}`}
+                        placeholder={`Describe the reason for reporting ${subject}`}
                         rows={4}
                     />
                 </div>

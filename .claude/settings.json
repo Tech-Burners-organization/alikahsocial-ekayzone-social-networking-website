@@ -144,7 +144,12 @@
       "Bash(node test-final.js)",
       "Bash(sed -i \"s/waitUntil: 'networkidle'/waitUntil: 'domcontentloaded'/g\" test-final.js)",
       "Bash(node test-forgot-fix.js)",
-      "Bash(node test-otp-overflow.js)"
+      "Bash(node test-otp-overflow.js)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(echo \"TSC_EXIT:$?\")",
+      "Bash(node test-chat-notifications.js)",
+      "Bash(node debug-back.js)",
+      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/package-lock.json\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.js \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.png)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",

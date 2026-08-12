@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   Bell,
   Compass,
@@ -22,6 +23,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import CreateModal from "@/components/shared/create/CreateModal";
+
+type CreateOption = "video" | "upload" | "go-live" | "product" | "service";
+
+const CREATE_ROUTE_MAP: Record<CreateOption, string> = {
+  video: "/",
+  upload: "/",
+  "go-live": "/go-live",
+  product: "/create-product",
+  service: "/create-service",
+};
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
@@ -34,61 +46,79 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [createOpen, setCreateOpen] = useState(false);
+
+  const handleCreateSelect = (option: CreateOption) => {
+    setCreateOpen(false);
+    const route = CREATE_ROUTE_MAP[option];
+    if (route) {
+      window.location.href = route;
+    }
+  };
 
   return (
-    <SidebarPrimitive collapsible="icon">
-      <SidebarHeader className="items-center py-4">
-        <Link href="/" className="flex items-center justify-center">
-          <Image
-            src={AllImages.logo}
-            alt="eKayzone"
-            className="h-auto w-[90%] group-data-[collapsible=icon]:hidden"
-            priority
-          />
-          <Image
-            src={AllImages.logoIcon}
-            alt="eKayzone"
-            className="hidden h-auto w-7 shrink-0 group-data-[collapsible=icon]:block"
-            priority
-          />
-        </Link>
-      </SidebarHeader>
+    <>
+      <SidebarPrimitive collapsible="icon">
+        <SidebarHeader className="items-center py-4">
+          <Link href="/" className="flex items-center justify-center">
+            <Image
+              src={AllImages.logo}
+              alt="eKayzone"
+              className="h-auto w-[90%] group-data-[collapsible=icon]:hidden"
+              priority
+            />
+            <Image
+              src={AllImages.logoIcon}
+              alt="eKayzone"
+              className="hidden h-auto w-7 shrink-0 group-data-[collapsible=icon]:block"
+              priority
+            />
+          </Link>
+        </SidebarHeader>
 
-      <SidebarContent className="px-2">
-        <SidebarMenu className="gap-1.5">
-          {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-            const isActive = pathname === href;
-            return (
-              <SidebarMenuItem key={label}>
-                <SidebarMenuButton
-                  render={<Link href={href} />}
-                  isActive={isActive}
-                  tooltip={label}
-                  size="lg"
-                  className="gap-3 rounded-xl px-4 text-[15px] group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-full [&_svg]:size-5"
-                >
-                  <Icon strokeWidth={isActive ? 2.5 : 2} />
-                  <span
-                    className={`group-data-[collapsible=icon]:hidden ${isActive ? "font-semibold" : "font-medium"}`}
+        <SidebarContent className="px-2">
+          <SidebarMenu className="gap-1.5">
+            {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+              const isActive = pathname === href;
+              return (
+                <SidebarMenuItem key={label}>
+                  <SidebarMenuButton
+                    render={<Link href={href} />}
+                    isActive={isActive}
+                    tooltip={label}
+                    size="lg"
+                    className="gap-3 rounded-xl px-4 text-[15px] group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-full [&_svg]:size-5"
                   >
-                    {label}
-                  </span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            );
-          })}
-        </SidebarMenu>
-      </SidebarContent>
+                    <Icon strokeWidth={isActive ? 2.5 : 2} />
+                    <span
+                      className={`group-data-[collapsible=icon]:hidden ${isActive ? "font-semibold" : "font-medium"}`}
+                    >
+                      {label}
+                    </span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarContent>
 
-      <SidebarFooter className="pb-4">
-        <button
-          type="button"
-          className="flex items-center justify-center gap-2 rounded-xl bg-secondary-color px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-secondary-color/90 group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:rounded-md group-data-[collapsible=icon]:p-0"
-        >
-          <Plus className="hidden size-4 group-data-[collapsible=icon]:block" />
-          <span className="group-data-[collapsible=icon]:hidden">Create</span>
-        </button>
-      </SidebarFooter>
-    </SidebarPrimitive>
+        <SidebarFooter className="pb-4">
+          <button
+            type="button"
+            onClick={() => setCreateOpen(true)}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary-color px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-secondary-color/90 group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:rounded-md group-data-[collapsible=icon]:p-0"
+          >
+            <Plus className="hidden size-4 group-data-[collapsible=icon]:block" />
+            <span className="group-data-[collapsible=icon]:hidden">Create</span>
+          </button>
+        </SidebarFooter>
+      </SidebarPrimitive>
+
+      <CreateModal
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onSelect={handleCreateSelect}
+      />
+    </>
   );
 }
