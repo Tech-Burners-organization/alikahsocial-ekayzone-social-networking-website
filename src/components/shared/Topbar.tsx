@@ -2,8 +2,13 @@
 
 import { Smartphone } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useAuthModal } from "@/context/AuthModalProvider";
+import { useGetUserData } from "@/context/useGetUserData";
 
 const Topbar = () => {
+    const { open } = useAuthModal();
+    const user = useGetUserData();
+
     return (
         <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-slate-100 bg-white px-4">
             <SidebarTrigger />
@@ -16,13 +21,20 @@ const Topbar = () => {
                     <Smartphone className="size-4" />
                     Get App
                 </button>
-                <span className="h-4 w-px bg-white/15" />
-                <button
-                    type="button"
-                    className="rounded-full bg-secondary-color px-5 py-1.5 text-sm font-semibold text-white transition-colors"
-                >
-                    Log in
-                </button>
+                {!user && <span className="h-4 w-px bg-white/15" />}
+                {user ? (
+                    <div className="flex size-9 items-center justify-center rounded-full bg-secondary-color text-sm font-bold text-white">
+                        {user.fullName?.[0]?.toUpperCase() ?? "U"}
+                    </div>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() => open("login")}
+                        className="rounded-full bg-secondary-color px-5 py-1.5 text-sm font-semibold text-white transition-colors"
+                    >
+                        Log in
+                    </button>
+                )}
             </div>
         </header>
     );

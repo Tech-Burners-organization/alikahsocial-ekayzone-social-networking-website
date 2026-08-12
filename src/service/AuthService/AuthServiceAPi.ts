@@ -10,10 +10,11 @@ import { cookies } from "next/headers";
 const isProduction = process.env.NODE_ENV === "production";
 
 // Shared cookie options. Not httpOnly because the client reads the access token
-// via js-cookie (useGetUserData / SocketProvider).
-const cookieOptions = (expires: Date) => ({
+// via js-cookie (useGetUserData / SocketProvider). Omitting `expires` makes it a
+// session cookie (cleared when the browser closes) — used for "Remember me" off.
+const cookieOptions = (expires?: Date) => ({
   path: "/",
-  expires,
+  ...(expires ? { expires } : {}),
   secure: isProduction,
   sameSite: "lax" as const,
 });
@@ -25,7 +26,10 @@ type ResendOtpBody = {
 
 
 export const registerUser = async (
-  req = {
+  req: {
+    body: { email?: string; phone?: string; [key: string]: any };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }
@@ -58,7 +62,10 @@ export const registerUser = async (
 };
 
 export const registerUserOtp = async (
-  req = {
+  req: {
+    body: { otp?: string; [key: string]: any };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }
@@ -126,7 +133,10 @@ export const resendOtp = async (
 };
 
 export const loginUser = async (
-  req = {
+  req: {
+    body: { email?: string; password?: string; rememberMe?: boolean };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }
@@ -158,17 +168,18 @@ export const loginUser = async (
       }
 
       const threeMonths = 1000 * 60 * 60 * 24 * 30 * 3; // 3 months in milliseconds
+      const persistUntil = req.body?.rememberMe === false ? undefined : new Date(Date.now() + threeMonths);
 
       (await cookies()).set(
         "ekayzone_access_token",
         result?.data?.accessToken,
-        cookieOptions(new Date(Date.now() + threeMonths))
+        cookieOptions(persistUntil)
       );
 
       (await cookies()).set(
         "ekayzone_refresh_token",
         result?.data?.refreshToken,
-        cookieOptions(new Date(Date.now() + threeMonths))
+        cookieOptions(persistUntil)
       );
     }
 

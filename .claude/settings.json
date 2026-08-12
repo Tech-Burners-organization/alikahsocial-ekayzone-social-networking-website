@@ -132,7 +132,10 @@
       "Bash(node test-checkout.js)",
       "Bash(sed -i \"s/R1200/R1,200/g; s/R2400/R2,400/g\" test-checkout.js)",
       "Bash(cd \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website\" && sed -i 's/size-\\\\[26px\\\\]/size-6.5/g' \"src/app/\\(mainLayout\\)/marketplace/[id]/checkout/_components/OrderSummaryStep.tsx\")",
-      "Bash(node test-empty-submit.js)"
+      "Bash(node test-empty-submit.js)",
+      "Bash(node test-auth.js)",
+      "Bash(sed -i \"s/getByText\\('Phone', { exact: true }\\)/getByText\\('phone', { exact: true }\\)/; s/getByText\\('Email', { exact: true }\\)/getByText\\('email', { exact: true }\\)/\" test-auth.js)",
+      "Bash(node test-phone-tab.js)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
