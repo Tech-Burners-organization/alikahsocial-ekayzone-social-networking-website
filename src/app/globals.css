@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 @theme default {
   --color-primary-color: #ffffff;
-  --color-background-color: #f2f4f7;
+  --color-background-color: #ffffff;
   --color-secondary-color: #10b981;
   --color-base-color: #333333;
   --color-anchor-color: #10b981;

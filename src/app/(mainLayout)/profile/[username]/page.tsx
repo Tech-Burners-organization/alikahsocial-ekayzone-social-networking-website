@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import PageWraper from '@/components/ui/CustomUi/PageWraper';
-import { ProfileOverview } from '@/components/shared/reels/ProfileOverview';
 import { getProfileForUsername } from '@/components/shared/reels/feedData';
+import ProfilePageContent from './ProfilePageContent';
 
 export default async function ProfilePage({ params }: PageProps<'/profile/[username]'>) {
     const { username } = await params;
@@ -13,7 +13,7 @@ export default async function ProfilePage({ params }: PageProps<'/profile/[usern
 
     return (
         <PageWraper title="Profile" backToPreviousPage>
-            <ProfileOverview profile={profile} />
+            <ProfilePageContent profile={profile} />
         </PageWraper>
     );
 }
