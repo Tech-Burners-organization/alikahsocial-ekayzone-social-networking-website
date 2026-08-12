@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { FormInput } from "@/components/ui/CustomUi/ReuseForm/Form";
-import { forgetPassword } from "@/service/AuthService/AuthServiceAPi";
+// TODO: re-enable once the real auth API call below is uncommented.
+// import { forgetPassword } from "@/service/AuthService/AuthServiceAPi";
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
 
@@ -21,7 +22,10 @@ export default function ForgotPasswordView() {
     const onSubmit = async (values: ForgotPasswordFormValues) => {
         setIsSubmitting(true);
         try {
-            const result = await forgetPassword({ body: { email: values.email } });
+            // TODO: re-enable real auth API call once ready.
+            // const result = await forgetPassword({ body: { email: values.email } });
+            console.log("[ForgotPasswordView] forgot password submit", values);
+            const result = { success: true, message: "" };
             if (result?.success) {
                 setForgotEmail(values.email);
                 toast.success("Verification code sent");

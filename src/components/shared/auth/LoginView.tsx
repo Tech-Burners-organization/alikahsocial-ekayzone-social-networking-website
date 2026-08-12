@@ -8,7 +8,8 @@ import { toast } from "sonner";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { FormInput, FormPassword, FormCheckbox } from "@/components/ui/CustomUi/ReuseForm/Form";
-import { loginUser } from "@/service/AuthService/AuthServiceAPi";
+// TODO: re-enable once the real auth API call below is uncommented.
+// import { loginUser } from "@/service/AuthService/AuthServiceAPi";
 import { loginSchema, type LoginFormValues } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
 
@@ -25,7 +26,10 @@ export default function LoginView() {
     const onSubmit = async (values: LoginFormValues) => {
         setIsSubmitting(true);
         try {
-            const result = await loginUser({ body: values });
+            // TODO: re-enable real auth API call once ready.
+            // const result = await loginUser({ body: values });
+            console.log("[LoginView] login submit", values);
+            const result = { success: true, message: "" };
             if (result?.success) {
                 toast.success("Welcome back!");
                 close();

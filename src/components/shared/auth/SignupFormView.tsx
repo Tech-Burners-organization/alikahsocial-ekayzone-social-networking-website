@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FormInput } from "@/components/ui/CustomUi/ReuseForm/Form";
-import { registerUser } from "@/service/AuthService/AuthServiceAPi";
+// TODO: re-enable once the real auth API call below is uncommented.
+// import { registerUser } from "@/service/AuthService/AuthServiceAPi";
 import { signupSchema, type SignupFormValues, type SignupMethod } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
 
@@ -30,9 +31,12 @@ export default function SignupFormView() {
     const onSubmit = async (values: SignupFormValues) => {
         setIsSubmitting(true);
         try {
-            const result = await registerUser({
-                body: values.method === "email" ? { email: values.identifier } : { phone: values.identifier },
-            });
+            // TODO: re-enable real auth API call once ready.
+            // const result = await registerUser({
+            //     body: values.method === "email" ? { email: values.identifier } : { phone: values.identifier },
+            // });
+            console.log("[SignupFormView] signup submit", values);
+            const result = { success: true, message: "" };
             if (result?.success) {
                 setPendingSignup({ method: values.method, value: values.identifier });
                 toast.success("Verification code sent");
