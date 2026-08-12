@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { BadgeCheck, EllipsisVertical, Play, Radio } from 'lucide-react';
 import { toast } from 'sonner';
 import ReusableModal from '@/components/ui/CustomUi/ReuseableModal';
@@ -23,11 +24,15 @@ interface ProfileModalProps {
     profile: CreatorProfile;
 }
 
-function ThumbnailGrid({ items }: { items: ProfileThumbnail[] }) {
+function ThumbnailGrid({ items, username }: { items: ProfileThumbnail[]; username: string }) {
     return (
         <div className="grid grid-cols-3 gap-1">
             {items.map((item) => (
-                <div key={item.id} className="relative aspect-9/16 overflow-hidden rounded-md bg-zinc-200">
+                <Link
+                    key={item.id}
+                    href={`/profile/${username}`}
+                    className="relative aspect-9/16 overflow-hidden rounded-md bg-zinc-200"
+                >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.thumbnailUrl} alt="" className="h-full w-full object-cover" />
                     {item.isLive && (
@@ -40,7 +45,7 @@ function ThumbnailGrid({ items }: { items: ProfileThumbnail[] }) {
                         <Play className="h-2.5 w-2.5 fill-white" />
                         {formatCompactNumber(item.views)}
                     </span>
-                </div>
+                </Link>
             ))}
         </div>
     );
@@ -126,7 +131,7 @@ export function ProfileModal({ open, onOpenChange, profile }: ProfileModalProps)
                 </div>
 
                 <div className="pt-4">
-                    <ThumbnailGrid items={activeTab === 'videos' ? profile.videos : profile.likedVideos} />
+                    <ThumbnailGrid items={activeTab === 'videos' ? profile.videos : profile.likedVideos} username={profile.username} />
                 </div>
             </div>
 

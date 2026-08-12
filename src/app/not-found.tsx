@@ -327,10 +327,10 @@ const NotFound = () => {
       `}</style>
 
       {/* Background Video */}
-      <video className="background-video" autoPlay loop muted>
+      {/* <video className="background-video" autoPlay loop muted>
         <source src="/assets/video/notFound.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
 
       {/* Gradient Overlay */}
       <div className="video-overlay"></div>

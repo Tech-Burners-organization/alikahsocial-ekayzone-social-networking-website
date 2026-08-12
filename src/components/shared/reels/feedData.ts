@@ -1,9 +1,6 @@
 import { AllImages } from "../../../../public/images/AllImages";
 import type { CommentEntry, CommentReply, CreatorProfile, FeedItem, ProfileThumbnail } from "./types";
 
-const PAGE_SIZE = 3; // deliberately matches the sliding mount-window size in ReelsSection
-const SIMULATED_LATENCY_MS = 900;
-
 const AVATAR = AllImages.profile.src;
 const COVER = AllImages.cover.src;
 const VIDEOS = ["/video/video1.mp4", "/video/video2.mp4", "/video/video3.mp4"];
@@ -156,16 +153,16 @@ export function getDummyItemAt(index: number): FeedItem {
     return { ...base, kind: "reel" };
 }
 
-export interface FeedPage {
-    items: FeedItem[];
-    nextCursor: string;
+// Static home feed — no pagination, just a fixed batch of dummy items.
+export function getHomeFeed(count = 9): FeedItem[] {
+    return Array.from({ length: count }, (_, i) => getDummyItemAt(i));
 }
 
-export async function fetchFeedPage(cursor: string | null, limit = PAGE_SIZE): Promise<FeedPage> {
-    await new Promise((resolve) => setTimeout(resolve, SIMULATED_LATENCY_MS));
-    const start = cursor ? Number(cursor) : 0;
-    const items = Array.from({ length: limit }, (_, i) => getDummyItemAt(start + i));
-    return { items, nextCursor: String(start + limit) };
+// All reels belonging to one poster, for the /profile/[username] page.
+export function getUserReels(username: string, count = 6): FeedItem[] {
+    const templateIndex = POSTER_TEMPLATES.findIndex((t) => t.username === username);
+    if (templateIndex === -1) return [];
+    return Array.from({ length: count }, (_, i) => getDummyItemAt(templateIndex + i * POSTER_TEMPLATES.length));
 }
 
 function buildThumbnails(seed: number, count: number): ProfileThumbnail[] {
@@ -202,4 +199,9 @@ export function getProfileForPoster(posterId: string): CreatorProfile {
 
     PROFILE_CACHE.set(posterId, profile);
     return profile;
+}
+
+export function getProfileForUsername(username: string): CreatorProfile | null {
+    const template = POSTER_TEMPLATES.find((t) => t.username === username);
+    return template ? getProfileForPoster(template.posterId) : null;
 }

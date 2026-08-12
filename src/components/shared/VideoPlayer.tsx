@@ -28,12 +28,13 @@ interface VideoPlayerProps {
     onMuteChange: (muted: boolean) => void;
     volume: number;
     onVolumeChange: (volume: number) => void;
+    onActive?: () => void;
     ref?: React.Ref<VideoPlayerControls>;
 }
 
 type OverlayKind = 'comments' | 'share' | 'profile' | 'reportVideo' | null;
 
-function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, ref }: VideoPlayerProps) {
+function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onActive, ref }: VideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null);
     const wasPlayingBeforeSeekRef = useRef(false);
@@ -58,6 +59,7 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, ref 
             ([entry]) => {
                 if (entry.isIntersecting) {
                     videoElement.play().catch(() => { }); // Handles browser autoplay blocking policies
+                    onActive?.();
                 } else {
                     videoElement.pause();
                     videoElement.currentTime = 0;
@@ -68,7 +70,7 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, ref 
 
         observer.observe(videoElement);
         return () => observer.disconnect();
-    }, []);
+    }, [onActive]);
 
     useEffect(() => {
         const videoElement = videoRef.current;

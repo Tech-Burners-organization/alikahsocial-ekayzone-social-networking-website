@@ -57,7 +57,13 @@
       "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_pagination_live_test.js\")",
       "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_tabs_test.js\")",
       "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_v2_test.js\")",
-      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_like_debug.js\")"
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_like_debug.js\")",
+      "Bash(mkdir -p \"src/app/\\(mainLayout\\)/profile/[username]\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_v3_test.js\")",
+      "Bash(NODE_PATH=\"C:\\\\Users\\\\Din\\\\AppData\\\\Local/npm-cache/_npx/db89d7302a373f10/node_modules\" node \"C:\\\\Users\\\\Din\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\\\25d9ab77-bd83-4389-ab13-89071f86d3eb\\\\scratchpad\\\\reels_v3_scroll_test.js\")"
+    ],
+    "additionalDirectories": [
+      "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile"
     ]
   }
 }
