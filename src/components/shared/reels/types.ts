@@ -66,8 +66,8 @@ export interface ProfileThumbnail {
 
 export interface CreatorProfile {
     posterId: string;
-    username: string;
-    displayName: string;
+    userName: string;
+    fullName: string;
     avatarUrl: string;
     isVerified: boolean;
     bio: string;

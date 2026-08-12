@@ -2,6 +2,7 @@
 'use client';
 
 import { memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
 import { ReelSeekBar } from './reels/ReelSeekBar';
@@ -13,9 +14,7 @@ import { LikeBurstOverlay, type LikeBurstHandle } from './reels/LikeBurstOverlay
 import { ActionRail } from './reels/ActionRail';
 import { CommentsSheet } from './reels/CommentsSheet';
 import { ShareModal } from './reels/ShareModal';
-import { ProfileModal } from './reels/ProfileModal';
 import { ReportModal } from './reels/ReportModal';
-import { getProfileForPoster } from './reels/feedData';
 import type { FeedItem } from './reels/types';
 
 export interface VideoPlayerControls {
@@ -32,9 +31,10 @@ interface VideoPlayerProps {
     ref?: React.Ref<VideoPlayerControls>;
 }
 
-type OverlayKind = 'comments' | 'share' | 'profile' | 'reportVideo' | null;
+type OverlayKind = 'comments' | 'share' | 'reportVideo' | null;
 
 function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onActive, ref }: VideoPlayerProps) {
+    const router = useRouter();
     const videoRef = useRef<HTMLVideoElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null);
     const wasPlayingBeforeSeekRef = useRef(false);
@@ -326,7 +326,7 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onAc
                     isVerified={item.isVerified}
                     caption={item.caption}
                     hashtags={item.hashtags}
-                    onAvatarClick={() => setActiveOverlay('profile')}
+                    onAvatarClick={() => router.push(`/profile/${item.username}`)}
                 />
 
                 <ActionRail
@@ -339,7 +339,7 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onAc
                     onOpenShare={() => setActiveOverlay('share')}
                     isSaved={isSaved}
                     onToggleSave={handleToggleSave}
-                    onViewProfile={() => setActiveOverlay('profile')}
+                    onViewProfile={() => router.push(`/profile/${item.username}`)}
                     onReportVideo={() => setActiveOverlay('reportVideo')}
                 />
             </div>
@@ -356,11 +356,6 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onAc
                 onOpenChange={(open) => (open ? setActiveOverlay('share') : closeOverlay())}
                 shareUrl={typeof window !== 'undefined' ? window.location.href : ''}
                 shareTitle={item.caption}
-            />
-            <ProfileModal
-                open={activeOverlay === 'profile'}
-                onOpenChange={(open) => (open ? setActiveOverlay('profile') : closeOverlay())}
-                profile={getProfileForPoster(item.posterId)}
             />
             <ReportModal
                 open={activeOverlay === 'reportVideo'}

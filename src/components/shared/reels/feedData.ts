@@ -186,8 +186,8 @@ export function getProfileForPoster(posterId: string): CreatorProfile {
 
     const profile: CreatorProfile = {
         posterId: template.posterId,
-        username: template.username,
-        displayName: template.displayName,
+        userName: template.username,
+        fullName: template.displayName,
         avatarUrl: AVATAR,
         isVerified: template.isVerified,
         bio: template.bio,

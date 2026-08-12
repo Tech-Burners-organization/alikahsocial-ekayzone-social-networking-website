@@ -185,7 +185,7 @@ const ReusableTabs = <T extends string>({
       <div className={`w-full flex ${justifyClass}`}>
         <div
           ref={tabRowRef}
-          className={`scrollbar-thin scrollbar-thumb-[#8B48FB] scrollbar-track-gray-200 hover:scrollbar-thumb-[#8B48FB55] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]  ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
+          className={`scrollbar-thin scrollbar-thumb-[#10b981] scrollbar-track-gray-200 hover:scrollbar-thumb-[#10b98155] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]  ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
             : "bg-[#ffffff]  p-1 rounded-xl flex gap-2 relative overflow-x-auto"}`}
         >
           {tabs.map((tab) => {
@@ -203,14 +203,14 @@ const ReusableTabs = <T extends string>({
                 {variant === "bordered" ? (
                   <span
                     tab-value={tab.value}
-                    className={activeTab === tab.value ? "text-[#8B48FB]" : "text-[#707070]"}
+                    className={activeTab === tab.value ? "text-secondary-color" : "text-[#707070]"}
                   >
                     {tab.label}
                   </span>
                 ) : (
                   <span tab-value={tab.value} className="relative inline-block">
-                    {/* Base layer — always the plain purple label */}
-                    <span className="text-[#8B48FB]">{tab.label}</span>
+                    {/* Base layer — always the plain label */}
+                    <span className="text-secondary-color">{tab.label}</span>
                     {/* Overlay — white copy, clipped to only the slice the pill currently covers */}
                     <span
                       className="absolute inset-0 text-white pointer-events-none"
