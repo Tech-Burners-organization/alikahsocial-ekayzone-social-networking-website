@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import { X, ZoomIn } from "lucide-react"
 import { Button } from "../button"
 import {
@@ -7,6 +8,7 @@ import {
     TooltipTrigger,
 } from "../tooltip"
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function ImagePreview({ src, alt, className = "", title = "" }: {
     src: string;
@@ -22,7 +24,7 @@ export function ImagePreview({ src, alt, className = "", title = "" }: {
                 <TooltipTrigger
                     render={
                         <div
-                            className={`relative group cursor-pointer overflow-hidden rounded-lg ${className}`}
+                            className={cn("relative group cursor-pointer overflow-hidden rounded-lg", className)}
                             onClick={() => setIsOpen(true)}
                         />
                     }
@@ -30,7 +32,8 @@ export function ImagePreview({ src, alt, className = "", title = "" }: {
                     <Image
                         src={src}
                         alt={alt}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
@@ -45,30 +48,32 @@ export function ImagePreview({ src, alt, className = "", title = "" }: {
 
             </Tooltip>
 
-            {isOpen && (
-                <div
-                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-                    onClick={() => setIsOpen(false)}
-                >
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="absolute top-4 right-4 text-white hover:bg-white/20"
+            {isOpen &&
+                createPortal(
+                    <div
+                        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
                         onClick={() => setIsOpen(false)}
                     >
-                        <X size={24} />
-                    </Button>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute top-4 right-4 text-white hover:bg-white/20"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            <X size={24} />
+                        </Button>
 
-                    <Image
-                        src={src}
-                        alt={alt}
-                        className="max-w-full max-h-full object-contain"
-                        width={800}
-                        height={600}
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                </div>
-            )}
+                        <Image
+                            src={src}
+                            alt={alt}
+                            className="max-w-full max-h-full object-contain"
+                            width={800}
+                            height={600}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>,
+                    document.body
+                )}
         </>
     )
 }

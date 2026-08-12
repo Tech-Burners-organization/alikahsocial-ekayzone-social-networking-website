@@ -1,7 +1,4 @@
 import {
-    Monitor,
-    Shirt,
-    Sparkles,
     Gem,
     Gamepad2,
     type LucideIcon,
@@ -19,13 +16,20 @@ export interface Product {
     seller: string;
     discount?: number;
     category: string;
+    /** Additional gallery images for the product detail page. Defaults to `[image]`. */
+    images?: string[];
+    description?: string;
+    specs?: string[];
+    sellerHandle?: string;
+    sellerAvatar?: string;
+    stock?: 'in-stock' | 'out-of-stock';
 }
 
-export const CATEGORY_PILLS: { id: string; label: string; icon: LucideIcon | null }[] = [
-    { id: 'all', label: 'All', icon: null },
-    { id: 'electronics', label: 'Electronics', icon: Monitor },
-    { id: 'fashion', label: 'Fashion', icon: Shirt },
-    { id: 'beauty', label: 'Beauty', icon: Sparkles },
+export const CATEGORY_PILLS: { id: string; label: string; icon: LucideIcon | null; iconSrc?: string }[] = [
+    { id: 'all', label: 'All', icon: null, iconSrc: '/images/marketplace/category-all.svg' },
+    { id: 'electronics', label: 'Electronics', icon: null, iconSrc: '/images/marketplace/category-electronics.svg' },
+    { id: 'fashion', label: 'Fashion', icon: null, iconSrc: '/images/marketplace/category-fashion.svg' },
+    { id: 'beauty', label: 'Beauty', icon: null, iconSrc: '/images/marketplace/category-beauty.svg' },
     { id: 'jewelry', label: 'Jewelry', icon: Gem },
     { id: 'gaming', label: 'Gaming', icon: Gamepad2 },
 ];
@@ -54,6 +58,11 @@ const PRODUCTS: Product[] = [
         rating: 4.8,
         reviewCount: 521,
         image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1200&h=700&fit=crop',
+        ],
         seller: 'FitGear SA',
         discount: 25,
         category: 'fashion',
@@ -67,6 +76,11 @@ const PRODUCTS: Product[] = [
         rating: 4.7,
         reviewCount: 384,
         image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1539185441755-769473a23570?w=1200&h=700&fit=crop',
+        ],
         seller: 'SneakerWorld',
         discount: 24,
         category: 'fashion',
@@ -80,6 +94,11 @@ const PRODUCTS: Product[] = [
         rating: 4.5,
         reviewCount: 210,
         image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1539185441755-769473a23570?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1597045566677-8cf032ed6634?w=1200&h=700&fit=crop',
+        ],
         seller: 'FitGear SA',
         discount: 27,
         category: 'fashion',
@@ -93,6 +112,11 @@ const PRODUCTS: Product[] = [
         rating: 4.6,
         reviewCount: 156,
         image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1539185441755-769473a23570?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1597045566677-8cf032ed6634?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=1200&h=700&fit=crop',
+        ],
         seller: 'UrbanKicks',
         discount: 25,
         category: 'fashion',
@@ -106,6 +130,11 @@ const PRODUCTS: Product[] = [
         rating: 4.9,
         reviewCount: 678,
         image: 'https://images.unsplash.com/photo-1597045566677-8cf032ed6634?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1597045566677-8cf032ed6634?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=1200&h=700&fit=crop',
+        ],
         seller: 'SneakerWorld',
         discount: 21,
         category: 'fashion',
@@ -119,6 +148,11 @@ const PRODUCTS: Product[] = [
         rating: 4.7,
         reviewCount: 892,
         image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=1200&h=700&fit=crop',
+        ],
         seller: 'FitGear SA',
         discount: 24,
         category: 'fashion',
@@ -132,6 +166,11 @@ const PRODUCTS: Product[] = [
         rating: 4.4,
         reviewCount: 301,
         image: 'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1200&h=700&fit=crop',
+        ],
         seller: 'UrbanKicks',
         discount: 25,
         category: 'fashion',
@@ -145,6 +184,11 @@ const PRODUCTS: Product[] = [
         rating: 4.6,
         reviewCount: 445,
         image: 'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=1200&h=700&fit=crop',
+        ],
         seller: 'FitGear SA',
         discount: 24,
         category: 'fashion',
@@ -158,6 +202,11 @@ const PRODUCTS: Product[] = [
         rating: 4.5,
         reviewCount: 567,
         image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=1200&h=700&fit=crop',
+        ],
         seller: 'SneakerWorld',
         discount: 25,
         category: 'fashion',
@@ -171,6 +220,11 @@ const PRODUCTS: Product[] = [
         rating: 4.8,
         reviewCount: 234,
         image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=1200&h=700&fit=crop',
+        ],
         seller: 'RunPro',
         discount: 21,
         category: 'fashion',
@@ -184,6 +238,11 @@ const PRODUCTS: Product[] = [
         rating: 4.9,
         reviewCount: 1024,
         image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&h=700&fit=crop',
+        ],
         seller: 'FitGear SA',
         discount: 20,
         category: 'fashion',
@@ -197,9 +256,48 @@ const PRODUCTS: Product[] = [
         rating: 4.7,
         reviewCount: 412,
         image: 'https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=400&h=400&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=1200&h=700&fit=crop',
+        ],
         seller: 'SneakerWorld',
         discount: 20,
         category: 'fashion',
+    },
+    {
+        id: '13',
+        title: 'MSI Laptop',
+        price: 1200,
+        originalPrice: 1600,
+        currency: 'R',
+        rating: 4.8,
+        reviewCount: 521,
+        image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=1200&h=700&fit=crop',
+            'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=1200&h=700&fit=crop',
+        ],
+        seller: 'TechZone SA',
+        sellerHandle: '@techzonesa',
+        sellerAvatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop',
+        discount: 25,
+        category: 'electronics',
+        stock: 'in-stock',
+        description:
+            'Powerful and reliable, the MSI Gaming Laptop is designed for gaming, productivity, and creative work. It features a high-performance Intel Core processor, NVIDIA graphics, and a smooth Full HD display that delivers fast and responsive performance. With high-speed SSD storage, upgradeable RAM, and advanced cooling technology, this laptop ensures efficient multitasking and stable performance during demanding tasks.',
+        specs: [
+            'Brand: MSI',
+            'Processor: Intel Core i5 / i7',
+            'Graphics: NVIDIA GeForce GTX / RTX',
+            'Display: 15.6" Full HD (1920×1080)',
+            'RAM: 8GB / 16GB DDR4',
+            'Storage: 512GB / 1TB SSD',
+            'Operating System: Windows 11',
+            'Connectivity: WiFi, Bluetooth, HDMI, USB Type-C',
+        ],
     },
 ];
 
@@ -212,6 +310,10 @@ const SORTERS: Record<SortOption, (a: Product, b: Product) => number> = {
     'rating-desc': (a, b) => b.rating - a.rating,
     'discount-desc': (a, b) => (b.discount ?? 0) - (a.discount ?? 0),
 };
+
+export function getProductById(id: string): Product | undefined {
+    return PRODUCTS.find((product) => product.id === id);
+}
 
 export function getFilteredProducts({
     search,

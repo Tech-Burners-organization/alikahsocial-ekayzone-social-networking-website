@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { cn } from "@/lib/utils";
@@ -36,13 +37,17 @@ export default function CategoryPills({ active }: { active: string }) {
                         type="button"
                         onClick={() => handleChange(pill.id)}
                         className={cn(
-                            'flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-all',
+                            'flex h-9 items-center gap-1.5 rounded-full border px-3 text-base font-bold whitespace-nowrap transition-all',
                             isActive
-                                ? 'bg-[#00A86B] text-white'
-                                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+                                ? 'border-transparent bg-secondary-color text-white'
+                                : 'border-border bg-[#f2f2f4] text-foreground hover:bg-muted'
                         )}
                     >
-                        {Icon && <Icon className="size-4" />}
+                        {pill.iconSrc ? (
+                            <Image src={pill.iconSrc} alt="" width={20} height={20} className="size-5" />
+                        ) : (
+                            Icon && <Icon className="size-5" />
+                        )}
                         {pill.label}
                     </button>
                 );

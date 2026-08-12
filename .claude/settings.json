@@ -108,11 +108,31 @@
       "Bash(curl -s -o /tmp/profile_overview.html -w \"STATUS:%{http_code}\\\\n\" \"http://localhost:3000/profile/learn_with_thandi\")",
       "Bash(curl -s -o /tmp/profile_watch.html -w \"STATUS:%{http_code}\\\\n\" \"http://localhost:3000/profile/learn_with_thandi/watch\")",
       "Bash(curl -s \"http://localhost:3000/profile/does-not-exist\" -o /dev/null -w \"STATUS:%{http_code}\\\\n\")",
-      "Bash(echo \"=== fullName + userName in overview ===\" *)"
+      "Bash(echo \"=== fullName + userName in overview ===\" *)",
+      "Read(//c/Users/Din/.claude/projects/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "Bash(rm \"d:/Projects/eKayzone_social_networking\\(alikahsocial\\)/ekayzone_website/src/app/\\(mainLayout\\)/marketplace/[id]/_components/RelatedProductCard.tsx\")",
+      "Bash(grep -o '[0-9]* Product[s]*<' /tmp/mp_check.html | head -3 *)",
+      "Bash(grep -o '\\\\\\\\\"children\\\\\\\\\":\\\\[[0-9]*,\\\\\\\\\" Product' /tmp/mp_check.html | head -3 *)",
+      "Bash(grep -o 'images/marketplace/category-[a-z]*\\\\.svg' /tmp/mp_check.html | sort -u *)",
+      "Bash(grep -o 'bg-secondary-color[a-zA-Z0-9_\\\\\\\\/. -]*' /tmp/mp_check.html | head -3 *)",
+      "Bash(where chromium-cli *)",
+      "Bash(where playwright *)",
+      "Bash(where chrome.exe)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(node test-gallery.js)",
+      "Bash(node test-gallery-debug.js)",
+      "Bash(node test-swipe.js)",
+      "Bash(node test-lightbox-viewport.js)",
+      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\")"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
-      "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile\\[username]"
+      "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile\\[username]",
+      "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\_components",
+      "C:\\Users\\Din\\AppData\\Local\\Temp\\claude\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\859b430c-dcfb-48c4-8cfa-ff37faf0a196\\scratchpad\\node_modules"
     ]
   }
 }

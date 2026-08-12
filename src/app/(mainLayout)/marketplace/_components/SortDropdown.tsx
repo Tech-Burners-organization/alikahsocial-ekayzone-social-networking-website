@@ -2,12 +2,12 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
+import { SlidersHorizontal } from "lucide-react";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
-    SelectValue,
 } from "@/components/ui/select";
 import { SORT_OPTIONS, type SortOption } from "../_lib/data";
 
@@ -35,9 +35,9 @@ export default function SortDropdown({ value }: { value: SortOption }) {
 
     return (
         <Select value={value} onValueChange={handleChange}>
-            <SelectTrigger className="h-auto w-fit gap-1.5 border-none bg-transparent p-0 text-sm font-medium text-foreground shadow-none hover:bg-transparent focus-visible:ring-0 dark:bg-transparent dark:hover:bg-transparent">
-                <span className="font-normal text-muted-foreground">Sort by:</span>
-                <SelectValue />
+            <SelectTrigger className="h-7.5 w-fit gap-1 rounded-full border-none bg-secondary-color px-3 py-1 text-base font-bold text-white shadow-none hover:bg-secondary-color/90 focus-visible:ring-0 dark:bg-secondary-color dark:hover:bg-secondary-color/90 [&_svg]:text-white">
+                <SlidersHorizontal className="size-5" />
+                Sort
             </SelectTrigger>
             <SelectContent align="end">
                 {SORT_OPTIONS.map((option) => (

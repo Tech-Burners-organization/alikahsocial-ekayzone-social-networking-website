@@ -25,12 +25,8 @@ export default function ProductsPanel({
 
             {/* ─── Results Count + Sort ──────────────── */}
             <div className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                    Showing{' '}
-                    <span className="font-medium text-foreground">
-                        {products.length}
-                    </span>{' '}
-                    product{products.length === 1 ? '' : 's'}
+                <p className="text-base font-semibold text-muted-foreground">
+                    {products.length} Product{products.length === 1 ? '' : 's'}
                 </p>
                 <SortDropdown value={sort} />
             </div>
