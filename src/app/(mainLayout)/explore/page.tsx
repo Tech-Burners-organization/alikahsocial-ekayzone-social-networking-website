@@ -1,13 +1,22 @@
-import React from 'react';
+import { getDiscoverThumbnails } from "./_lib/data";
+import CategoryGrid from "./_components/CategoryGrid";
+import TrendingList from "./_components/TrendingList";
+import VideoGrid from "./_components/VideoGrid";
 
-const page = () => {
+export default function ExplorePage() {
+    const discoverItems = getDiscoverThumbnails(0);
+
     return (
-        <div className="flex min-h-[300vh] flex-col items-center justify-between p-24 bg-amber-700">
-            <div className="h-screen bg-blue-600 w-full"></div>
-            <div className="h-screen bg-red-600 w-full"></div>
-            <div className="h-screen bg-yellow-600 w-full"></div>
+        <div className="flex flex-col gap-6 p-10">
+            <h1 className="text-2xl lg:text-3xl font-bold text-foreground">Explore</h1>
+
+            <CategoryGrid />
+            <TrendingList />
+
+            <div className="flex flex-col gap-3">
+                <h2 className="text-2xl font-bold text-[#0a2c07]">Discover</h2>
+                <VideoGrid items={discoverItems} />
+            </div>
         </div>
     );
-};
-
-export default page;
+}

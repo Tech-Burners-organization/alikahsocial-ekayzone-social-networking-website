@@ -190,7 +190,10 @@ export const loginUser = async (
 };
 
 export const forgetPassword = async (
-  req = {
+  req: {
+    body: { email?: string; [key: string]: any };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }
@@ -223,7 +226,10 @@ export const forgetPassword = async (
 };
 
 export const forgetPasswordOtp = async (
-  req = {
+  req: {
+    body: { otp?: string; [key: string]: any };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }
@@ -257,7 +263,10 @@ export const forgetPasswordOtp = async (
   }
 };
 export const changePassword = async (
-  req = {
+  req: {
+    body: { newPassword?: string; confirmPassword?: string; [key: string]: any };
+    params?: any;
+  } = {
     body: {},
     params: {},
   }

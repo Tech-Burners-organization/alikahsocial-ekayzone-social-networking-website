@@ -30,3 +30,21 @@ export const otpSchema = z.object({
 });
 
 export type OtpFormValues = z.infer<typeof otpSchema>;
+
+export const forgotPasswordSchema = z.object({
+    email: z.string().min(1, "Email is required").email("Enter a valid email address"),
+});
+
+export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+
+export const newPasswordSchema = z
+    .object({
+        newPassword: z.string().min(6, "Password must be at least 6 characters"),
+        confirmPassword: z.string().min(1, "Please confirm your password"),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ["confirmPassword"],
+    });
+
+export type NewPasswordFormValues = z.infer<typeof newPasswordSchema>;
