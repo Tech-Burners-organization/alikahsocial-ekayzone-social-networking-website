@@ -7,8 +7,12 @@ import { toast } from "sonner";
 import { FormInput } from "@/components/ui/CustomUi/ReuseForm/Form";
 // TODO: re-enable once the real auth API call below is uncommented.
 // import { forgetPassword } from "@/service/AuthService/AuthServiceAPi";
-import { forgotPasswordSchema, type ForgotPasswordFormValues } from "@/schemas/auth";
+import {
+    forgotPasswordSchema,
+    type ForgotPasswordFormValues,
+} from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
+import { pillInputClassName, PillLabel } from "../create/formStyles";
 
 export default function ForgotPasswordView() {
     const { setView, setForgotEmail } = useAuthModal();
@@ -31,7 +35,9 @@ export default function ForgotPasswordView() {
                 toast.success("Verification code sent");
                 setView("forgot-password-otp");
             } else {
-                toast.error(result?.message || "Couldn't send a reset code. Please try again.");
+                toast.error(
+                    result?.message || "Couldn't send a reset code. Please try again.",
+                );
             }
         } catch {
             toast.error("Couldn't send a reset code. Please try again.");
@@ -43,14 +49,26 @@ export default function ForgotPasswordView() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
             <p className="text-base font-medium text-muted-foreground">
-                Enter the email associated with your account and we&apos;ll send a code to reset your password.
+                Enter the email associated with your account and we&apos;ll send a code
+                to reset your password.
             </p>
 
-            <FormInput control={control} name="email" label="Email" placeholder="Enter your email" type="email" />
+            <FormInput
+                control={control}
+                name="email"
+                label={<PillLabel>Email</PillLabel>}
+                inputClassName={pillInputClassName}
+                placeholder="Enter your email"
+                type="email"
+            />
 
             <p className="text-center text-sm font-medium text-foreground">
                 Remembered your password?{" "}
-                <button type="button" onClick={() => setView("login")} className="font-bold text-secondary-color">
+                <button
+                    type="button"
+                    onClick={() => setView("login")}
+                    className="font-bold text-secondary-color"
+                >
                     Log In
                 </button>
             </p>

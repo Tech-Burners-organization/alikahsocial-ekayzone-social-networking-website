@@ -149,14 +149,22 @@
       "Bash(echo \"TSC_EXIT:$?\")",
       "Bash(node test-chat-notifications.js)",
       "Bash(node debug-back.js)",
-      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/package-lock.json\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.js \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.png)"
+      "Bash(rm -rf \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/node_modules\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad/package-lock.json\" \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.js \"C:/Users/Din/AppData/Local/Temp/claude/d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/859b430c-dcfb-48c4-8cfa-ff37faf0a196/scratchpad\"/*.png)",
+      "Bash(ls -la C:/Users/Din/AppData/Local/Temp/claude/D--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website/6a0cb50b-1989-4487-bcb9-ecaac45a1566/scratchpad/create-modal.png)",
+      "Bash(node -e \"const m = require\\('lucide-react'\\); console.log\\('ShoppingBasket:', typeof m.ShoppingBasket\\); console.log\\('HandPlatter:', typeof m.HandPlatter\\); console.log\\('Video:', typeof m.Video\\); console.log\\('Upload:', typeof m.Upload\\); console.log\\('Radio:', typeof m.Radio\\); console.log\\('EllipsisVertical:', typeof m.EllipsisVertical\\);\")",
+      "Bash(rm -f /tmp/cp.html)",
+      "Bash(rm -f /tmp/cs.html)",
+      "Bash(rm -f /tmp/gl.html)",
+      "Bash(rm -f /tmp/glive.html)",
+      "Bash(curl -s http://localhost:3000/go-live/live > /tmp/glive2.html *)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
       "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile\\[username]",
       "d:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\_components",
       "C:\\Users\\Din\\AppData\\Local\\Temp\\claude\\d--Projects-eKayzone-social-networking-alikahsocial--ekayzone-website\\859b430c-dcfb-48c4-8cfa-ff37faf0a196\\scratchpad\\node_modules",
-      "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\checkout\\_components"
+      "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\marketplace\\[id]\\checkout\\_components",
+      "\\tmp"
     ]
   }
 }

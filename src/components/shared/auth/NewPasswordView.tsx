@@ -9,6 +9,7 @@ import { FormPassword } from "@/components/ui/CustomUi/ReuseForm/Form";
 // import { changePassword } from "@/service/AuthService/AuthServiceAPi";
 import { newPasswordSchema, type NewPasswordFormValues } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
+import { pillInputClassName, PillLabel } from "../create/formStyles";
 
 export default function NewPasswordView() {
     const { setView } = useAuthModal();
@@ -29,7 +30,9 @@ export default function NewPasswordView() {
             if (result?.success) {
                 setView("password-updated");
             } else {
-                toast.error(result?.message || "Couldn't update your password. Please try again.");
+                toast.error(
+                    result?.message || "Couldn't update your password. Please try again.",
+                );
             }
         } catch {
             toast.error("Couldn't update your password. Please try again.");
@@ -45,8 +48,20 @@ export default function NewPasswordView() {
             </p>
 
             <div className="flex flex-col gap-2.5">
-                <FormPassword control={control} name="newPassword" label="New Password" placeholder="Enter your new password" />
-                <FormPassword control={control} name="confirmPassword" label="Confirm Password" placeholder="Re-enter your new password" />
+                <FormPassword
+                    control={control}
+                    name="newPassword"
+                    label={<PillLabel>New Password</PillLabel>}
+                    inputClassName={pillInputClassName}
+                    placeholder="Enter your new password"
+                />
+                <FormPassword
+                    control={control}
+                    name="confirmPassword"
+                    label={<PillLabel>Confirm Password</PillLabel>}
+                    inputClassName={pillInputClassName}
+                    placeholder="Re-enter your new password"
+                />
             </div>
 
             <button

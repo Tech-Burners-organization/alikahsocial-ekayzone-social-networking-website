@@ -12,6 +12,7 @@ import { FormInput, FormPassword, FormCheckbox } from "@/components/ui/CustomUi/
 // import { loginUser } from "@/service/AuthService/AuthServiceAPi";
 import { loginSchema, type LoginFormValues } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
+import { pillInputClassName, PillLabel } from "../create/formStyles";
 
 export default function LoginView() {
     const router = useRouter();
@@ -48,12 +49,14 @@ export default function LoginView() {
         <div className="flex flex-col gap-5">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
                 <div className="flex flex-col gap-2.5">
-                    <FormInput control={control} name="email" label="Email" placeholder="Enter your email" type="email" />
-                    <FormPassword control={control} name="password" label="Password" placeholder="Enter your password" />
+                    <FormInput control={control} name="email" label={<PillLabel>Email</PillLabel>} inputClassName={pillInputClassName}
+                        placeholder="Enter your email" type="email" />
+                    <FormPassword control={control} name="password" label={<PillLabel>Password</PillLabel>} inputClassName={pillInputClassName}
+                        placeholder="Enter your password" />
                 </div>
 
                 <div className="flex items-center justify-between">
-                    <FormCheckbox control={control} name="rememberMe" label="Remember me" />
+                    <FormCheckbox control={control} name="rememberMe" label={<PillLabel>Remember me</PillLabel>} />
                     <button
                         type="button"
                         onClick={() => setView("forgot-password")}

@@ -12,20 +12,25 @@ export default function SignupMethodView() {
 
     return (
         <div className="flex flex-col items-center gap-10">
-            <Image src={AllImages.logo} alt="eKayzone" className="h-auto w-44" priority />
+            <Image
+                src={AllImages.logo}
+                alt="eKayzone"
+                className="h-auto w-44"
+                priority
+            />
 
-            <div className="flex w-full flex-col gap-2">
+            <div className="flex flex-col gap-5 w-[90%]">
                 <button
                     type="button"
                     onClick={() => setView("signup-form")}
-                    className="h-14 w-full rounded-full border-2 border-secondary-color bg-secondary-color text-xl font-bold text-white shadow-[inset_0_3px_3px_rgba(255,255,255,0.12)] transition-colors hover:bg-secondary-color/90"
+                    className="h-14 w-full rounded-full border-2 border-secondary-color bg-secondary-color text-base font-semibold text-white shadow-[inset_0_3px_3px_rgba(255,255,255,0.12)] transition-colors hover:bg-secondary-color/90"
                 >
                     Continue with Email or Phone
                 </button>
                 <button
                     type="button"
                     onClick={() => toast.info("Google sign-in is coming soon")}
-                    className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-black/6 bg-muted text-xl font-bold text-foreground"
+                    className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-black/6 bg-muted text-base font-semibold text-foreground"
                 >
                     <FcGoogle className="size-6" />
                     Continue with Google
@@ -33,7 +38,7 @@ export default function SignupMethodView() {
                 <button
                     type="button"
                     onClick={() => toast.info("Apple sign-in is coming soon")}
-                    className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-black/6 bg-muted text-xl font-bold text-foreground"
+                    className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-black/6 bg-muted text-base font-semibold text-foreground"
                 >
                     <FaApple className="size-6" />
                     Continue with Apple
@@ -42,11 +47,19 @@ export default function SignupMethodView() {
 
             <p className="text-center text-base font-medium text-foreground">
                 By continuing, you agree to our{" "}
-                <button type="button" onClick={() => toast.info("Terms of service coming soon")} className="font-bold text-secondary-color">
+                <button
+                    type="button"
+                    onClick={() => toast.info("Terms of service coming soon")}
+                    className="font-bold text-secondary-color"
+                >
                     Terms of service
                 </button>{" "}
                 &amp;{" "}
-                <button type="button" onClick={() => toast.info("Privacy policy coming soon")} className="font-bold text-secondary-color">
+                <button
+                    type="button"
+                    onClick={() => toast.info("Privacy policy coming soon")}
+                    className="font-bold text-secondary-color"
+                >
                     Privacy policy
                 </button>
             </p>

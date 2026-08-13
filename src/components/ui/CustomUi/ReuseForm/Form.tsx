@@ -247,7 +247,8 @@ export const FormSelect: FormControlFunc<{
   placeholder?: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
-}> = ({ children, placeholder = "Select an option", prefix, suffix, ...props }) => {
+  triggerClassName?: string;
+}> = ({ children, placeholder = "Select an option", prefix, suffix, triggerClassName, ...props }) => {
   return (
     <FormBase {...props}>
       {({ onChange, onBlur, ...field }) => (
@@ -262,7 +263,8 @@ export const FormSelect: FormControlFunc<{
               className={cn(
                 "w-full bg-primary-color! border! border-base-color/30! focus:border-base-color/70! outline-none! shadow! ring-0! text-base! py-5!",
                 prefix && "pl-10",
-                suffix && "pr-10"
+                suffix && "pr-10",
+                triggerClassName
               )}
               aria-invalid={field["aria-invalid"]}
               id={field.id}

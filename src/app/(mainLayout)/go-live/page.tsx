@@ -2,17 +2,22 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Camera, ChevronDown, Radio } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { ChevronDown, Radio } from "lucide-react";
 import PageWraper from "@/components/ui/CustomUi/PageWraper";
 import Container from "@/components/ui/CustomUi/Container";
 import { FormInput, FormSelect } from "@/components/ui/CustomUi/ReuseForm/Form";
-import {
-    SelectItem,
-} from "@/components/ui/select";
+import { SelectItem } from "@/components/ui/select";
 import { goLiveSchema, type GoLiveFormValues } from "@/schemas/create";
+import { CameraPreviewBox } from "@/components/shared/create/CameraPreviewBox";
+import { CreateSubmitBar } from "@/components/shared/create/CreateSubmitBar";
+import { cn } from "@/lib/utils";
+import { pillInputClassName, pillTriggerClassName, PillLabel } from "@/components/shared/create/formStyles";
+
+const FORM_ID = "go-live-form";
 
 export default function GoLivePage() {
+    const router = useRouter();
     const form = useForm<GoLiveFormValues>({
         resolver: zodResolver(goLiveSchema),
         defaultValues: {
@@ -23,24 +28,31 @@ export default function GoLivePage() {
         },
     });
 
+    const privacy = form.watch("privacy");
+
+    const onSubmit = form.handleSubmit(() => {
+        router.push("/go-live/live");
+    });
+
     return (
-        <PageWraper title="Go Live">
+        <PageWraper title="Go Live" backToPreviousPage>
             <Container className="flex flex-col gap-6">
-                <form className="flex flex-col gap-5">
+                <form id={FORM_ID} onSubmit={onSubmit} className="flex flex-col gap-4">
                     <FormInput
                         control={form.control}
                         name="streamTitle"
-                        label="Stream Title"
+                        label={<PillLabel>Stream title</PillLabel>}
                         placeholder="Enter Subject"
-                        prefix={<Camera className="size-4 text-base-color/60" />}
+                        inputClassName={pillInputClassName}
                     />
 
                     <FormSelect
                         control={form.control}
                         name="category"
-                        label="Category"
+                        label={<PillLabel>Category</PillLabel>}
                         placeholder="Select Category"
-                        suffix={<ChevronDown className="size-4 text-base-color/60" />}
+                        triggerClassName={pillTriggerClassName}
+                        suffix={<ChevronDown className="size-4 text-muted-foreground" />}
                     >
                         <SelectItem value="education">Education</SelectItem>
                         <SelectItem value="entertainment">Entertainment</SelectItem>
@@ -52,53 +64,55 @@ export default function GoLivePage() {
                     <FormSelect
                         control={form.control}
                         name="promoteListing"
-                        label="Promote a Listing (Optional)"
+                        label={<PillLabel>Promote a Listing (Optional)</PillLabel>}
                         placeholder="Select a listing to promote"
-                        suffix={<ChevronDown className="size-4 text-base-color/60" />}
+                        triggerClassName={pillTriggerClassName}
+                        suffix={<ChevronDown className="size-4 text-muted-foreground" />}
                     >
                         <SelectItem value="none">No listing to promote</SelectItem>
                     </FormSelect>
 
-                    {/* Privacy */}
-                    <div className="flex flex-col gap-3">
-                        <span className="text-sm font-semibold text-base-color/60">Privacy</span>
+                    <div className="flex flex-col gap-2.5">
+                        <span className="text-sm font-semibold text-muted-foreground">Privacy</span>
                         <div className="flex gap-5">
                             <button
                                 type="button"
-                                className="flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500 border border-emerald-500 text-white shadow-sm"
+                                onClick={() => form.setValue("privacy", "public", { shouldDirty: true })}
+                                className={cn(
+                                    "h-10 w-[191px] rounded-full border text-sm font-bold transition-colors",
+                                    privacy === "public"
+                                        ? "border-black/10 bg-secondary-color text-white shadow-sm"
+                                        : "border-black/5 bg-white text-muted-foreground hover:bg-muted/50"
+                                )}
                             >
-                                <span className="text-sm font-semibold">Public</span>
+                                Public
                             </button>
                             <button
                                 type="button"
-                                className="flex items-center gap-2 rounded-full px-4 py-2 bg-white border border-base-color/30 text-base-color/60 hover:bg-base-color/5"
+                                onClick={() => form.setValue("privacy", "followers-only", { shouldDirty: true })}
+                                className={cn(
+                                    "h-10 w-[191px] rounded-full border text-sm font-bold transition-colors",
+                                    privacy === "followers-only"
+                                        ? "border-black/10 bg-secondary-color text-white shadow-sm"
+                                        : "border-black/5 bg-white text-muted-foreground hover:bg-muted/50"
+                                )}
                             >
-                                <span className="text-sm font-semibold">Followers Only</span>
+                                Followers Only
                             </button>
                         </div>
                     </div>
 
-                    {/* Camera Preview */}
-                    <div className="rounded-lg bg-base-color/50 border border-base-color/30 flex items-center justify-center" style={{ height: "300px" }}>
-                        <div className="flex flex-col items-center gap-3">
-                            <div className="rounded-lg bg-rose-100/60 p-6">
-                                <Camera className="size-8 text-rose-500" />
-                            </div>
-                            <div className="text-center">
-                                <p className="text-lg font-bold text-[#0c0c0c]">Camera Preview</p>
-                                <p className="text-sm text-base-color/60">Tap to enable Camera</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <Button
-                        className="w-full rounded-full bg-rose-500 hover:bg-rose-600 text-white font-bold h-14 text-lg shadow-sm"
-                    >
-                        <Radio className="size-5 mr-2" />
-                        Go Live
-                    </Button>
+                    <CameraPreviewBox />
                 </form>
             </Container>
+
+            <CreateSubmitBar
+                formId={FORM_ID}
+                label="Go Live"
+                variant="live"
+                icon={<Radio className="size-5" />}
+                isSubmitting={form.formState.isSubmitting}
+            />
         </PageWraper>
     );
 }

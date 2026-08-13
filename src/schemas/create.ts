@@ -15,6 +15,7 @@ export type CreateProductFormValues = z.infer<typeof createProductSchema>;
 export const createServiceSchema = z.object({
     title: z.string().min(1, "Service title is required"),
     price: z.string().min(1, "Service price is required"),
+    additionalPrices: z.array(z.object({ value: z.string().min(1, "Price is required") })).optional(),
     description: z.string().optional(),
     category: z.string().min(1, "Select a category"),
     images: z.array(z.any()).optional(),

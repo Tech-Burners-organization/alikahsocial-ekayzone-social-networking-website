@@ -1,12 +1,25 @@
-'use client';
+"use client";
 
-import { ChevronLeft } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormInput, FormSelect, FormTextarea } from '@/components/ui/CustomUi/ReuseForm/Form';
-import { SelectItem } from '@/components/ui/select';
-import { deliveryDetailsSchema, type DeliveryDetailsFormValues } from '@/schemas/checkout';
-import { SOUTH_AFRICA_PROVINCES } from '../_lib/types';
+import { ChevronLeft } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+    FormInput,
+    FormSelect,
+    FormTextarea,
+} from "@/components/ui/CustomUi/ReuseForm/Form";
+import { SelectItem } from "@/components/ui/select";
+import {
+    deliveryDetailsSchema,
+    type DeliveryDetailsFormValues,
+} from "@/schemas/checkout";
+import { SOUTH_AFRICA_PROVINCES } from "../_lib/types";
+import {
+    pillInputClassName,
+    PillLabel,
+    pillTextareaClassName,
+    pillTriggerClassName,
+} from "@/components/shared/create/formStyles";
 
 interface DeliveryFormProps {
     defaultValues: DeliveryDetailsFormValues;
@@ -14,7 +27,11 @@ interface DeliveryFormProps {
     onContinue: (values: DeliveryDetailsFormValues) => void;
 }
 
-export default function DeliveryForm({ defaultValues, onBack, onContinue }: DeliveryFormProps) {
+export default function DeliveryForm({
+    defaultValues,
+    onBack,
+    onContinue,
+}: DeliveryFormProps) {
     const { control, handleSubmit } = useForm<DeliveryDetailsFormValues>({
         resolver: zodResolver(deliveryDetailsSchema),
         defaultValues,
@@ -31,35 +48,58 @@ export default function DeliveryForm({ defaultValues, onBack, onContinue }: Deli
                 >
                     <ChevronLeft className="size-5" />
                 </button>
-                <h1 className="text-2xl font-bold text-foreground">Delivery Information</h1>
+                <h1 className="text-2xl font-bold text-foreground">
+                    Delivery Information
+                </h1>
             </div>
 
             <div className="flex flex-col gap-4">
-                <FormInput control={control} name="fullName" label="Full Name" placeholder="Enter your full name" />
+                <FormInput
+                    control={control}
+                    name="fullName"
+                    label={<PillLabel>Full Name</PillLabel>}
+                    inputClassName={pillInputClassName}
+                    placeholder="Enter your full name"
+                />
                 <FormInput
                     control={control}
                     name="phone"
-                    label="Phone Number"
+                    label={<PillLabel>Phone Number</PillLabel>}
+                    inputClassName={pillInputClassName}
                     placeholder="Enter your phone number"
                     type="tel"
                 />
                 <FormInput
                     control={control}
                     name="streetAddress1"
-                    label="Street Address"
+                    label={<PillLabel>Street Address</PillLabel>}
+                    inputClassName={pillInputClassName}
                     placeholder="Enter your street address"
                 />
                 <FormInput
                     control={control}
                     name="streetAddress2"
-                    label="Street Address"
+                    label={<PillLabel>Street Address 2</PillLabel>}
+                    inputClassName={pillInputClassName}
                     placeholder="Apartment, suite, etc. (optional)"
                 />
-                <FormInput control={control} name="city" label="City" placeholder="Enter your city" />
+                <FormInput
+                    control={control}
+                    name="city"
+                    label={<PillLabel>City</PillLabel>}
+                    inputClassName={pillInputClassName}
+                    placeholder="Enter your city"
+                />
 
                 <div className="flex flex-col gap-4 sm:flex-row">
                     <div className="flex-1">
-                        <FormSelect control={control} name="province" label="Province" placeholder="Select a province">
+                        <FormSelect
+                            control={control}
+                            name="province"
+                            label={<PillLabel>Province</PillLabel>}
+                            placeholder="Select a province"
+                            triggerClassName={pillTriggerClassName}
+                        >
                             {SOUTH_AFRICA_PROVINCES.map((province) => (
                                 <SelectItem key={province} value={province}>
                                     {province}
@@ -71,7 +111,8 @@ export default function DeliveryForm({ defaultValues, onBack, onContinue }: Deli
                         <FormInput
                             control={control}
                             name="postalCode"
-                            label="Postal Code"
+                            label={<PillLabel>Postal Code</PillLabel>}
+                            inputClassName={pillInputClassName}
                             placeholder="Enter your postal code"
                         />
                     </div>
@@ -80,7 +121,8 @@ export default function DeliveryForm({ defaultValues, onBack, onContinue }: Deli
                 <FormTextarea
                     control={control}
                     name="note"
-                    label="Note (Optional)"
+                    label={<PillLabel>Note (Optional)</PillLabel>}
+                    inputClassName={pillTextareaClassName}
                     placeholder="Enter any special delivery instructions here"
                 />
             </div>

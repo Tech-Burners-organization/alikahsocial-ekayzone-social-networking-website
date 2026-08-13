@@ -5,11 +5,11 @@ import {
     Video,
     Upload,
     Radio,
-    Package,
-    Briefcase,
+    ShoppingBasket,
+    HandPlatter,
+    ChevronRight,
     X,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type CreateOption =
@@ -36,36 +36,36 @@ const createOptions: {
         id: "video",
         title: "Record Video",
         subtitle: "Film directly with your camera",
-        icon: <Video className="size-6 text-emerald-600" />,
-        bg: "bg-emerald-50",
+        icon: <Video className="size-6" style={{ color: "#10B981" }} />,
+        bg: "#f0fdf4",
     },
     {
         id: "upload",
         title: "Upload Video",
         subtitle: "Choose a video from your device",
-        icon: <Upload className="size-6 text-sky-600" />,
-        bg: "bg-sky-100/60",
+        icon: <Upload className="size-6" style={{ color: "#3DABE2" }} />,
+        bg: "rgba(61,171,226,0.15)",
     },
     {
         id: "go-live",
         title: "Go Live",
         subtitle: "Start streaming to your audience now",
-        icon: <Radio className="size-6 text-rose-500" />,
-        bg: "bg-rose-100/60",
+        icon: <Radio className="size-6" style={{ color: "#FF3366" }} />,
+        bg: "rgba(255,51,102,0.15)",
     },
     {
         id: "product",
         title: "Create Product",
         subtitle: "List a physical item for sale",
-        icon: <Package className="size-6 text-amber-600" />,
-        bg: "bg-amber-100/60",
+        icon: <ShoppingBasket className="size-6" style={{ color: "#F59E0B" }} />,
+        bg: "rgba(245,158,11,0.15)",
     },
     {
         id: "service",
         title: "Create Service",
         subtitle: "Offer your skills and get booked",
-        icon: <Briefcase className="size-6 text-violet-600" />,
-        bg: "bg-violet-100/60",
+        icon: <HandPlatter className="size-6" style={{ color: "#663375" }} />,
+        bg: "rgba(102,51,117,0.15)",
     },
 ];
 
@@ -78,49 +78,59 @@ export default function CreateModal({
         <ReusableModal
             open={open}
             onOpenChange={onOpenChange}
-            title="Create"
-            description="Share your skills with the world"
-            maxWidth="sm:max-w-[500px]"
-            footer={
-                <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => onOpenChange(false)}
-                >
-                    Cancel
-                </Button>
-            }
+            title=""
+            description=""
+            maxWidth="sm:max-w-[447px]"
+            footer={null}
+            hideDefaultCloseButton
         >
-            <div className="flex flex-col gap-3">
-                {createOptions.map((option) => (
-                    <button
-                        key={option.id}
-                        type="button"
-                        onClick={() => onSelect(option.id)}
-                        className={cn(
-                            "flex items-center gap-3 rounded-lg border border-base-color/30 bg-white p-3 transition-all hover:bg-base-color/5",
-                            "text-left"
-                        )}
-                    >
-                        <div
+            <div className="relative flex flex-col items-center gap-8 pt-1">
+                <button
+                    type="button"
+                    onClick={() => onOpenChange(false)}
+                    aria-label="Close"
+                    className="absolute -top-3 right-0 flex size-10 items-center justify-center rounded-full border border-black/5 bg-secondary-color/10 shadow-sm transition-colors hover:bg-secondary-color/20"
+                >
+                    <X className="size-5 text-foreground" />
+                </button>
+
+                <div className="flex flex-col items-center gap-0.5 text-center">
+                    <h2 className="text-xl font-extrabold text-foreground">Create</h2>
+                    <p className="text-base text-muted-foreground">
+                        Share your skills with the world
+                    </p>
+                </div>
+
+                <div className="flex w-full flex-col gap-3">
+                    {createOptions.map((option) => (
+                        <button
+                            key={option.id}
+                            type="button"
+                            onClick={() => onSelect(option.id)}
                             className={cn(
-                                "flex size-11 shrink-0 items-center justify-center rounded-md",
-                                option.bg
+                                "flex items-center justify-between rounded-2xl border border-border bg-white p-3 text-left shadow-sm transition-colors hover:bg-muted/50"
                             )}
                         >
-                            {option.icon}
-                        </div>
-                        <div className="flex flex-1 flex-col gap-0.5">
-                            <span className="text-base font-semibold text-[#313233]">
-                                {option.title}
-                            </span>
-                            <span className="text-sm text-base-color/60">
-                                {option.subtitle}
-                            </span>
-                        </div>
-                        <X className="size-4 text-base-color/30" />
-                    </button>
-                ))}
+                            <div className="flex items-center gap-1.5">
+                                <div
+                                    className="flex size-12.75 shrink-0 items-center justify-center rounded-lg"
+                                    style={{ backgroundColor: option.bg }}
+                                >
+                                    {option.icon}
+                                </div>
+                                <div className="flex flex-col gap-0.5">
+                                    <span className="text-lg font-bold text-foreground/80">
+                                        {option.title}
+                                    </span>
+                                    <span className="text-sm text-muted-foreground">
+                                        {option.subtitle}
+                                    </span>
+                                </div>
+                            </div>
+                            <ChevronRight className="size-6 shrink-0 text-foreground" />
+                        </button>
+                    ))}
+                </div>
             </div>
         </ReusableModal>
     );

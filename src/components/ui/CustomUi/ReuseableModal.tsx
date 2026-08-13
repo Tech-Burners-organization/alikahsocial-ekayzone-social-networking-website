@@ -22,6 +22,8 @@ interface ReusableModalProps {
     maxWidth?: string;
     showCloseButton?: boolean;
     closeButtonText?: string;
+    /** Suppresses DialogContent's built-in top-right close button, for callers rendering their own. */
+    hideDefaultCloseButton?: boolean;
 }
 
 function ReusableModal({
@@ -35,12 +37,13 @@ function ReusableModal({
     maxWidth = "sm:max-w-[625px]",
     showCloseButton = false,
     closeButtonText = "Cancel",
+    hideDefaultCloseButton = false,
 }: ReusableModalProps) {
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {trigger && <DialogTrigger render={trigger} />}
 
-            <DialogContent className={maxWidth}>
+            <DialogContent className={maxWidth} showCloseButton={!hideDefaultCloseButton}>
                 <DialogHeader>
                     <DialogTitle className='text-lg sm:text-xl lg:text-2xl font-bold'>{title}</DialogTitle>
                     {description && <DialogDescription>{description}</DialogDescription>}

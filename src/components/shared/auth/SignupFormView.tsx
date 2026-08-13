@@ -11,6 +11,7 @@ import { FormInput } from "@/components/ui/CustomUi/ReuseForm/Form";
 // import { registerUser } from "@/service/AuthService/AuthServiceAPi";
 import { signupSchema, type SignupFormValues, type SignupMethod } from "@/schemas/auth";
 import { useAuthModal } from "@/context/AuthModalProvider";
+import { pillInputClassName, PillLabel } from "../create/formStyles";
 
 export default function SignupFormView() {
     const { setView, setPendingSignup } = useAuthModal();
@@ -78,8 +79,9 @@ export default function SignupFormView() {
                         key={method}
                         control={control}
                         name="identifier"
-                        label={method === "email" ? "Email" : "Phone"}
+                        label={<PillLabel>{method === "email" ? "Email" : "Phone Number"}</PillLabel>}
                         placeholder={method === "email" ? "Enter your user email" : "Enter your phone number"}
+                        inputClassName={pillInputClassName}
                         type={method === "email" ? "email" : "tel"}
                     />
                 </div>

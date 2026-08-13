@@ -1,16 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Package, ChevronDown, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 import PageWraper from "@/components/ui/CustomUi/PageWraper";
 import Container from "@/components/ui/CustomUi/Container";
 import { FormInput, FormSelect, FormTextarea, FormUpload } from "@/components/ui/CustomUi/ReuseForm/Form";
 import { SelectItem } from "@/components/ui/select";
 import { createProductSchema, type CreateProductFormValues } from "@/schemas/create";
+import { AiDescriptionChip } from "@/components/shared/create/AiDescriptionChip";
+import { ListingNoticeBanner } from "@/components/shared/create/ListingNoticeBanner";
+import { CreateSubmitBar } from "@/components/shared/create/CreateSubmitBar";
+import CreationModal from "@/components/shared/create/CreationModal";
+import { pillInputClassName, pillTextareaClassName, pillTriggerClassName, PillLabel } from "@/components/shared/create/formStyles";
+
+const FORM_ID = "create-product-form";
 
 export default function CreateProductPage() {
+    const [launched, setLaunched] = useState(false);
+
     const form = useForm<CreateProductFormValues>({
         resolver: zodResolver(createProductSchema),
         defaultValues: {
@@ -20,60 +29,62 @@ export default function CreateProductPage() {
             description: "",
             category: "",
             stockQuantity: "",
+            images: [],
         },
     });
 
+    const onSubmit = form.handleSubmit(() => {
+        setLaunched(true);
+    });
+
     return (
-        <PageWraper title="Create Product">
+        <PageWraper title="Create Product" backToPreviousPage>
             <Container className="flex flex-col gap-6">
-                <form className="flex flex-col gap-5">
+                <form id={FORM_ID} onSubmit={onSubmit} className="flex flex-col gap-4">
                     <FormInput
                         control={form.control}
                         name="title"
-                        label="Product Title"
+                        label={<PillLabel>Product Title</PillLabel>}
                         placeholder="Enter Product Title"
-                        prefix={<Package className="size-4 text-base-color/60" />}
+                        inputClassName={pillInputClassName}
                     />
 
                     <FormInput
                         control={form.control}
                         name="sellingPrice"
-                        label="Selling Price"
+                        label={<PillLabel>Selling Price</PillLabel>}
                         placeholder="Enter Selling Price"
-                        prefix={<Package className="size-4 text-base-color/60" />}
                         type="number"
+                        inputClassName={pillInputClassName}
                     />
 
                     <FormInput
                         control={form.control}
                         name="discountPrice"
-                        label="Discount Price (Optional)"
+                        label={<PillLabel>Discount Price (Optional)</PillLabel>}
                         placeholder="Enter Discount Price"
-                        prefix={<Package className="size-4 text-base-color/60" />}
                         type="number"
+                        inputClassName={pillInputClassName}
                     />
 
-                    <FormTextarea
-                        control={form.control}
-                        name="description"
-                        label="Product Description"
-                        placeholder="Enter product Description"
-                    />
-
-                    <div className="flex items-center gap-2 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-1 w-fit">
-                        <Sparkles className="size-4 text-blue-500" />
-                        <span className="text-xs font-bold text-blue-600">Write description with AI</span>
-                        <div className="flex items-center justify-center rounded bg-amber-500 px-1.5">
-                            <span className="text-[8px] font-bold text-white">PRO</span>
-                        </div>
+                    <div className="flex flex-col gap-2">
+                        <FormTextarea
+                            control={form.control}
+                            name="description"
+                            label={<PillLabel>Product Description</PillLabel>}
+                            placeholder="Enter product Description"
+                            inputClassName={pillTextareaClassName}
+                        />
+                        <AiDescriptionChip />
                     </div>
 
                     <FormSelect
                         control={form.control}
                         name="category"
-                        label="Category"
+                        label={<PillLabel>Category</PillLabel>}
                         placeholder="Select Category"
-                        suffix={<ChevronDown className="size-4 text-base-color/60" />}
+                        triggerClassName={pillTriggerClassName}
+                        suffix={<ChevronDown className="size-4 text-muted-foreground" />}
                     >
                         <SelectItem value="electronics">Electronics</SelectItem>
                         <SelectItem value="fashion">Fashion</SelectItem>
@@ -85,33 +96,27 @@ export default function CreateProductPage() {
                     <FormInput
                         control={form.control}
                         name="stockQuantity"
-                        label="Stock Quantity"
+                        label={<PillLabel>Stock Quantity</PillLabel>}
                         placeholder="Type your stock quantity"
-                        prefix={<Package className="size-4 text-base-color/60" />}
                         type="number"
+                        inputClassName={pillInputClassName}
                     />
 
                     <FormUpload
                         control={form.control}
                         name="images"
-                        label="Product Images"
+                        label={<PillLabel>Product Images</PillLabel>}
                         maxFiles={5}
                         accept="image/*"
                     />
 
-                    <Button
-                        className="w-full rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold h-14 text-lg shadow-sm"
-                    >
-                        Publish Product
-                    </Button>
-
-                    <div className="flex items-center gap-2 rounded bg-amber-50 border border-amber-200 px-4 py-3">
-                        <p className="text-sm font-semibold text-amber-800">
-                            Your listing will be <strong>active for 60 days free</strong>. You will be notified before it expires.
-                        </p>
-                    </div>
+                    <ListingNoticeBanner />
                 </form>
             </Container>
+
+            <CreateSubmitBar formId={FORM_ID} label="Publish Product" isSubmitting={form.formState.isSubmitting} />
+
+            <CreationModal open={launched} onOpenChange={setLaunched} type="product-launched" />
         </PageWraper>
     );
 }
