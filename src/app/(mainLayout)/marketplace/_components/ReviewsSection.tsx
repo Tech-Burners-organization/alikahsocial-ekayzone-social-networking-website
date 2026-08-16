@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ProductReviews } from "../_lib/data";
+import type { ReviewsSummary } from "../_lib/reviews";
 
 function RatingBar({ star, count, max }: { star: number; count: number; max: number }) {
     const width = max === 0 ? 0 : Math.round((count / max) * 100);
@@ -27,7 +27,7 @@ export default function ReviewsSection({
 }: {
     rating: number;
     reviewCount: number;
-    reviews: ProductReviews;
+    reviews: ReviewsSummary;
 }) {
     const max = Math.max(...Object.values(reviews.breakdown), 1);
 

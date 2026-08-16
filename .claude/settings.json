@@ -156,7 +156,12 @@
       "Bash(rm -f /tmp/cs.html)",
       "Bash(rm -f /tmp/gl.html)",
       "Bash(rm -f /tmp/glive.html)",
-      "Bash(curl -s http://localhost:3000/go-live/live > /tmp/glive2.html *)"
+      "Bash(curl -s http://localhost:3000/go-live/live > /tmp/glive2.html *)",
+      "Bash(grep -i \"\\\\.md$\")",
+      "Bash(npx next *)",
+      "Bash(node -e \"const m = require\\('lucide-react'\\); ['MapPin','Car','Home','Dumbbell','Camera','Sparkles'].forEach\\(n => console.log\\(n, typeof m[n]\\)\\);\")",
+      "Bash(rm -f /tmp/services.html)",
+      "Bash(rm -f /tmp/s1.html)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",

@@ -35,7 +35,7 @@ export default async function MarketplacePage({ searchParams }: PageProps<'/mark
                     {
                         label: 'Services',
                         value: 'services',
-                        content: <ServicesPanel />,
+                        content: <ServicesPanel search={search} category={category} sort={sort} />,
                     },
                 ]}
             />

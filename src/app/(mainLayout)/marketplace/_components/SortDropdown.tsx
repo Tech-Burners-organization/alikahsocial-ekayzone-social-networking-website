@@ -11,7 +11,14 @@ import {
 } from "@/components/ui/select";
 import { SORT_OPTIONS, type SortOption } from "../_lib/data";
 
-export default function SortDropdown({ value }: { value: SortOption }) {
+export default function SortDropdown({
+    value,
+    options = SORT_OPTIONS,
+}: {
+    value: SortOption;
+    /** Defaults to the product sort list; pass a subset (e.g. without "Biggest Discount") to reuse this control elsewhere. */
+    options?: readonly { value: SortOption; label: string }[];
+}) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -40,7 +47,7 @@ export default function SortDropdown({ value }: { value: SortOption }) {
                 Sort
             </SelectTrigger>
             <SelectContent align="end">
-                {SORT_OPTIONS.map((option) => (
+                {options.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                         {option.label}
                     </SelectItem>

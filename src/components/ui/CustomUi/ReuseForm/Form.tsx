@@ -24,6 +24,8 @@ import { Checkbox } from "../../checkbox";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { MultiSelect } from "./MultiSelect";
 import { FileUpload } from "./FileUpload";
+import { DatePicker } from "./ReuseDatePicker";
+import { ReuseTimePicker } from "./ReuseTimePicker";
 import { cn } from "@/lib/utils";
 
 type FormControlProps<
@@ -409,6 +411,54 @@ export const FormUpload: FormControlFunc<{
           accept={accept}
           value={value || []}
           onChange={onChange}
+        />
+      )}
+    </FormBase>
+  );
+};
+
+// FormDatePicker component that integrates the ReuseForm DatePicker
+export const FormDatePicker: FormControlFunc<{
+  placeholder?: string;
+  formatString?: string;
+  disablePast?: boolean;
+  disableBefore?: Date;
+  disabled?: boolean;
+}> = ({ placeholder, formatString, disablePast, disableBefore, disabled, ...props }) => {
+  return (
+    <FormBase {...props}>
+      {({ onChange, value }) => (
+        <DatePicker
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          formatString={formatString}
+          disablePast={disablePast}
+          disableBefore={disableBefore}
+          disabled={disabled}
+        />
+      )}
+    </FormBase>
+  );
+};
+
+// FormTimePicker component that integrates the ReuseForm time picker
+export const FormTimePicker: FormControlFunc<{
+  selectedDate?: Date;
+  placeholder?: string;
+  timeFormat?: "12-hour" | "24-hour";
+  disablePast?: boolean;
+}> = ({ selectedDate, placeholder, timeFormat, disablePast, ...props }) => {
+  return (
+    <FormBase {...props}>
+      {({ onChange, value }) => (
+        <ReuseTimePicker
+          selectedDate={selectedDate}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          timeFormat={timeFormat}
+          disablePast={disablePast}
         />
       )}
     </FormBase>

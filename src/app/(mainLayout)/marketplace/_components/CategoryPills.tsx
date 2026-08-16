@@ -5,8 +5,20 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { cn } from "@/lib/utils";
 import { CATEGORY_PILLS } from "../_lib/data";
+import { SERVICE_CATEGORY_PILLS } from "../_lib/services";
 
-export default function CategoryPills({ active }: { active: string }) {
+export default function CategoryPills({
+    active,
+    variant = "products",
+}: {
+    active: string;
+    /**
+     * Which category list to render. Resolved from a client-side import (not a prop) because the
+     * list carries Lucide icon component references, which can't cross the Server → Client boundary as a prop.
+     */
+    variant?: "products" | "services";
+}) {
+    const pills = variant === "services" ? SERVICE_CATEGORY_PILLS : CATEGORY_PILLS;
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -28,7 +40,7 @@ export default function CategoryPills({ active }: { active: string }) {
 
     return (
         <div className="flex gap-2 overflow-x-auto scrollbar-none pb-1">
-            {CATEGORY_PILLS.map((pill) => {
+            {pills.map((pill) => {
                 const Icon = pill.icon;
                 const isActive = active === pill.id;
                 return (

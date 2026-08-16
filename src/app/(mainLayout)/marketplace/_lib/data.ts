@@ -25,7 +25,14 @@ export interface Product {
     stock?: 'in-stock' | 'out-of-stock';
 }
 
-export const CATEGORY_PILLS: { id: string; label: string; icon: LucideIcon | null; iconSrc?: string }[] = [
+export interface CategoryPill {
+    id: string;
+    label: string;
+    icon: LucideIcon | null;
+    iconSrc?: string;
+}
+
+export const CATEGORY_PILLS: CategoryPill[] = [
     { id: 'all', label: 'All', icon: null, iconSrc: '/images/marketplace/category-all.svg' },
     { id: 'electronics', label: 'Electronics', icon: null, iconSrc: '/images/marketplace/category-electronics.svg' },
     { id: 'fashion', label: 'Fashion', icon: null, iconSrc: '/images/marketplace/category-fashion.svg' },

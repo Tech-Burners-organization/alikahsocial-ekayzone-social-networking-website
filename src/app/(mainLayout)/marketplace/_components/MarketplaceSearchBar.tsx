@@ -4,7 +4,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 import ReuseSearchInput from "@/components/ui/CustomUi/ReuseForm/ReuseSearchInput";
 
-export default function MarketplaceSearchBar({ defaultValue }: { defaultValue: string }) {
+export default function MarketplaceSearchBar({
+    defaultValue,
+    placeholder = "Search products",
+}: {
+    defaultValue: string;
+    placeholder?: string;
+}) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -30,7 +36,7 @@ export default function MarketplaceSearchBar({ defaultValue }: { defaultValue: s
 
     return (
         <ReuseSearchInput
-            placeholder="Search products"
+            placeholder={placeholder}
             defaultValue={defaultValue}
             setSearch={handleSearch}
             setPage={() => {}}

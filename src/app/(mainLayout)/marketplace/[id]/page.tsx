@@ -5,8 +5,8 @@ import { getProductDetail, getRelatedProducts } from "./_lib/data";
 import ProductGallery from "./_components/ProductGallery";
 import ProductInfo from "./_components/ProductInfo";
 import ProductDescription from "./_components/ProductDescription";
-import SellerInfo from "./_components/SellerInfo";
-import ReviewsSection from "./_components/ReviewsSection";
+import SellerInfo from "../_components/SellerInfo";
+import ReviewsSection from "../_components/ReviewsSection";
 import RelatedProducts from "./_components/RelatedProducts";
 import BuyNowBar from "./_components/BuyNowBar";
 import Container from "@/components/ui/CustomUi/Container";
@@ -53,7 +53,7 @@ export default async function ProductDetailsPage({ params }: PageProps<'/marketp
                     <div className="flex flex-col gap-8">
                         <ProductInfo product={product} />
                         <ProductDescription description={product.description} specs={product.specs} />
-                        <SellerInfo product={product} />
+                        <SellerInfo name={product.seller} handle={product.sellerHandle} avatar={product.sellerAvatar} />
                         <ReviewsSection
                             rating={product.rating}
                             reviewCount={product.reviewCount}
