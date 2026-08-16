@@ -161,7 +161,13 @@
       "Bash(npx next *)",
       "Bash(node -e \"const m = require\\('lucide-react'\\); ['MapPin','Car','Home','Dumbbell','Camera','Sparkles'].forEach\\(n => console.log\\(n, typeof m[n]\\)\\);\")",
       "Bash(rm -f /tmp/services.html)",
-      "Bash(rm -f /tmp/s1.html)"
+      "Bash(rm -f /tmp/s1.html)",
+      "Bash(grep -iE \"error|warn\" /tmp/nextdev.log | grep -v \"ExperimentalWarning\\\\|DeprecationWarning\" | tail -60)",
+      "Bash(echo \"--- v1 \\(linked\\) ---\" *)",
+      "Bash(grep -o 'Choose a video to promote\\\\|Search videos\\\\|Unboxing[^<]*\\\\|Promote Video\\\\|<title>[^<]*' /tmp/promote_v1.html | head -20)",
+      "Bash(node -e \"try{require.resolve\\('playwright'\\); console.log\\('playwright available'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")",
+      "Bash(grep -iE \"error|warn|fail\" /tmp/nextdev_promote.log | grep -v \"ExperimentalWarning\\\\|DeprecationWarning\" | tail -50)",
+      "Bash(taskkill //PID 26360 //F)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
