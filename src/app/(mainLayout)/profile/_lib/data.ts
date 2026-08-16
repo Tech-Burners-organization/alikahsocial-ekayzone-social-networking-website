@@ -157,3 +157,8 @@ export function getMyVideoById(id: string): MyVideo | undefined {
 export function getPromotableVideos(): MyVideo[] {
     return VIDEO_POOL.filter((video) => video.kind === "video");
 }
+
+/** Past live streams — used by the Creator Studio "Live" tab. */
+export function getPastStreamVideos(): MyVideo[] {
+    return VIDEO_POOL.filter((video) => video.kind === "stream");
+}
