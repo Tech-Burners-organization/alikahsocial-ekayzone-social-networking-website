@@ -11,20 +11,20 @@ export default function ProfileActionButtons() {
                 <BarChart3 className="size-5" />
                 Creator Studio
             </Link>
-            <button
-                type="button"
+            <Link
+                href="/profile/orders"
                 className="flex h-12 items-center justify-center gap-2 rounded-full border border-secondary-color bg-secondary-color/10 px-5 text-base font-bold text-secondary-color transition-colors hover:bg-secondary-color/15"
             >
                 <ClipboardList className="size-5" />
                 My Orders
-            </button>
-            <button
-                type="button"
+            </Link>
+            <Link
+                href="/profile/shop"
                 className="flex h-12 items-center justify-center gap-2 rounded-full border border-black/[0.06] bg-muted px-5 text-base font-bold text-foreground transition-colors hover:bg-muted/70"
             >
                 <ShoppingBag className="size-5" />
                 My Shop
-            </button>
+            </Link>
         </div>
     );
 }

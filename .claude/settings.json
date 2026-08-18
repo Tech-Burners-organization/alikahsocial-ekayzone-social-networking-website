@@ -167,7 +167,11 @@
       "Bash(grep -o 'Choose a video to promote\\\\|Search videos\\\\|Unboxing[^<]*\\\\|Promote Video\\\\|<title>[^<]*' /tmp/promote_v1.html | head -20)",
       "Bash(node -e \"try{require.resolve\\('playwright'\\); console.log\\('playwright available'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")",
       "Bash(grep -iE \"error|warn|fail\" /tmp/nextdev_promote.log | grep -v \"ExperimentalWarning\\\\|DeprecationWarning\" | tail -50)",
-      "Bash(taskkill //PID 26360 //F)"
+      "Bash(taskkill //PID 26360 //F)",
+      "mcp__claude_ai_Figma__download_assets",
+      "Bash(python -)",
+      "Bash(grep -oE \"src[\\\\\\\\/][^ ]*\\\\.tsx?|D:.*\\\\.tsx?\")",
+      "Bash(git stash *)"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",

@@ -9,6 +9,8 @@ interface ReuseSearchInputProps {
     setPage: (page: number) => void;
     debounceDelay?: number;
     className?: string;
+    /** Overrides on the `<input>` itself, for callers needing different chrome (e.g. a pill). */
+    inputClassName?: string;
     showIcon?: boolean;
     /** Pre-fills the field (e.g. from a `?search=` URL param) without making it controlled. */
     defaultValue?: string;
@@ -20,6 +22,7 @@ const ReuseSearchInput: React.FC<ReuseSearchInputProps> = ({
     setPage,
     debounceDelay = 500,
     className = "",
+    inputClassName = "",
     showIcon = true,
     defaultValue,
 }) => {
@@ -52,7 +55,11 @@ const ReuseSearchInput: React.FC<ReuseSearchInputProps> = ({
                 placeholder={placeholder}
                 defaultValue={defaultValue}
                 onChange={handleSearch}
-                className={`${showIcon ? 'pl-10 py-5' : ''} border-[#E5E5E5] bg-[#F5F5F5] outline-none! shadow-none! ring-0! text-base`}
+                className={cn(
+                    showIcon && 'pl-10 py-5',
+                    'border-[#E5E5E5] bg-[#F5F5F5] outline-none! shadow-none! ring-0! text-base',
+                    inputClassName
+                )}
             />
         </div>
     );
