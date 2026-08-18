@@ -17,13 +17,17 @@ export default async function EditListingPage({
 
     if (!listing) notFound();
 
+    const { title, price, discountPrice, description, category, stockQuantity } = listing;
+
     return (
         <PageWraper
             title={listing.title}
             backToPreviousPage
             headerAction={<ListingActionMenu listingId={listing.id} />}
         >
-            <EditProductForm listing={listing} />
+            <EditProductForm
+                listing={{ title, price, discountPrice, description, category, stockQuantity }}
+            />
         </PageWraper>
     );
 }

@@ -10,6 +10,7 @@ import {
   Home,
   MessageCircle,
   Plus,
+  Settings,
   Store,
   User,
 } from "lucide-react";
@@ -42,6 +43,7 @@ const NAV_ITEMS = [
   { label: "Chat", href: "/chat", icon: MessageCircle },
   { label: "Notifications", href: "/notifications", icon: Bell },
   { label: "Profile", href: "/profile", icon: User },
+  { label: "Settings", href: "/settings", icon: Settings },
 ] as const;
 
 export function Sidebar() {

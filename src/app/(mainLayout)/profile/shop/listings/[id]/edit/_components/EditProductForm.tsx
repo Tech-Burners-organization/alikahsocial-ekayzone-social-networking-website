@@ -21,11 +21,23 @@ import {
     pillTextareaClassName,
     pillTriggerClassName,
 } from "@/components/shared/create/formStyles";
-import type { ShopListing } from "../../../../_lib/data";
+
+/**
+ * Editable fields only. The listing's rating, view counts, image and id are never read by
+ * the form, so they are kept off the RSC boundary.
+ */
+export interface EditProductDefaults {
+    title: string;
+    price: number;
+    discountPrice?: number;
+    description: string;
+    category: string;
+    stockQuantity: number;
+}
 
 const FORM_ID = "edit-product-form";
 
-export default function EditProductForm({ listing }: { listing: ShopListing }) {
+export default function EditProductForm({ listing }: { listing: EditProductDefaults }) {
     const router = useRouter();
 
     const form = useForm<CreateProductFormValues>({

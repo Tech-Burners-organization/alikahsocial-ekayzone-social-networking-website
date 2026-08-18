@@ -171,7 +171,17 @@
       "mcp__claude_ai_Figma__download_assets",
       "Bash(python -)",
       "Bash(grep -oE \"src[\\\\\\\\/][^ ]*\\\\.tsx?|D:.*\\\\.tsx?\")",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(npx -y kill-port 3112)",
+      "Bash(npx -y kill-port 3113)",
+      "Bash(rm -f /tmp/rows_email.txt /tmp/rows_sms.txt)",
+      "Bash(npx -y kill-port 3114)",
+      "Bash(python -c ' *)",
+      "Bash(npx -y kill-port 3117)",
+      "Bash(cd \"C:/Users/Din/.claude/skills/vercel-react-best-practices\" && ls && echo \"--- rules count ---\" && ls rules | wc -l)",
+      "Read(//c/Users/Din/.claude/skills/vercel-react-best-practices/**)",
+      "Read(//c/Users/Din/.claude/skills/vercel-react-best-practices/rules/**)",
+      "Bash(grep -v \"^\\\\s*$\")"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",
