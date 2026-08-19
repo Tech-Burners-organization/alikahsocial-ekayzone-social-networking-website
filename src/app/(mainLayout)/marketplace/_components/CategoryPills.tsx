@@ -49,16 +49,16 @@ export default function CategoryPills({
                         type="button"
                         onClick={() => handleChange(pill.id)}
                         className={cn(
-                            'flex h-9 items-center gap-1.5 rounded-full border px-3 text-base font-bold whitespace-nowrap transition-all',
+                            'flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-3 text-base font-bold whitespace-nowrap transition-all',
                             isActive
                                 ? 'border-transparent bg-secondary-color text-white'
                                 : 'border-border bg-[#f2f2f4] text-foreground hover:bg-muted'
                         )}
                     >
                         {pill.iconSrc ? (
-                            <Image src={pill.iconSrc} alt="" width={20} height={20} className="size-5" />
+                            <Image src={pill.iconSrc} alt="" width={20} height={20} className="size-5 shrink-0" />
                         ) : (
-                            Icon && <Icon className="size-5" />
+                            Icon && <Icon className="size-5 shrink-0" />
                         )}
                         {pill.label}
                     </button>

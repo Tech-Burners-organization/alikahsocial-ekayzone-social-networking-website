@@ -44,22 +44,12 @@ const ReusableTabs = <T extends string>({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition(); // 2. Initialize transition
 
-  // Breathing room around the tight text measurement — also doubles as a safety
-  // margin against tiny width mismatches (e.g. a web font swapping in after the
-  // first measurement), so a stale measurement clips into padding, not a letter.
-  const PILL_PADDING_X = 8;
-
+  // The pill spans the active tab's whole button — offsetLeft/offsetWidth are already
+  // measured against the row's padding box, which is exactly the indicator's containing
+  // block (the row is `relative`, the indicator is `absolute left-0`). So they need no
+  // compensation for the row's border, padding, or scrollLeft the way rect math would.
   const updateIndicator = (target: HTMLElement) => {
-    const tabBounds = target.getBoundingClientRect();
-    const rowBounds = tabRowRef.current?.getBoundingClientRect();
-
-    if (rowBounds && indicatorRef.current && tabRowRef.current) {
-      // Add scrollLeft to account for horizontal scroll
-      const offset = tabBounds.left - rowBounds.left + tabRowRef.current.scrollLeft - PILL_PADDING_X;
-      const width = tabBounds.width + PILL_PADDING_X * 2;
-
-      setIndicatorStyle({ offset, width });
-    }
+    setIndicatorStyle({ offset: target.offsetLeft, width: target.offsetWidth });
   };
 
   // Runs on every animation frame while the pill slides — computes, per tab, exactly
@@ -69,13 +59,13 @@ const ReusableTabs = <T extends string>({
     if (!row) return;
 
     const pillRight = pillLeft + pillWidth;
-    const rowBounds = row.getBoundingClientRect();
 
     const next: Record<string, { left: number; right: number }> = {};
     row.querySelectorAll<HTMLElement>("[tab-value]").forEach((el) => {
-      const bounds = el.getBoundingClientRect();
-      const tabLeft = bounds.left - rowBounds.left + row.scrollLeft;
-      const tabRight = tabLeft + bounds.width;
+      // Same padding-box origin as the pill's x (see updateIndicator), so the two
+      // are directly comparable without a scroll or border term.
+      const tabLeft = el.offsetLeft;
+      const tabRight = tabLeft + el.offsetWidth;
       const value = el.getAttribute("tab-value") ?? "";
 
       const overlapLeft = Math.max(tabLeft, pillLeft);
@@ -83,7 +73,7 @@ const ReusableTabs = <T extends string>({
 
       next[value] = overlapRight > overlapLeft
         ? { left: overlapLeft - tabLeft, right: tabRight - overlapRight } // visible slice
-        : { left: bounds.width, right: 0 }; // no overlap — fully hidden
+        : { left: el.offsetWidth, right: 0 }; // no overlap — fully hidden
     });
 
     setTextClips(next);
@@ -91,28 +81,25 @@ const ReusableTabs = <T extends string>({
 
   useEffect(() => {
     const measureActiveTab = () => {
-      const activeTabElement = document.querySelector(
-        `[tab-value="${activeTab}"]`
+      // Scoped to this row, so a second ReusableTabs on the same page can't be measured instead.
+      const activeTabElement = tabRowRef.current?.querySelector<HTMLElement>(
+        `[data-tab-button="${activeTab}"]`
       );
       if (activeTabElement) {
-        updateIndicator(activeTabElement as HTMLElement);
+        updateIndicator(activeTabElement);
       }
     };
 
     measureActiveTab();
 
     // Local web fonts (Graphik/Cagliari) can swap in after this first paint —
-    // re-measure once they're actually loaded so the tight text width is accurate.
+    // re-measure once they're actually loaded so the button width is accurate.
     document.fonts?.ready?.then(measureActiveTab);
 
-    const tabRowElement = tabRowRef.current;
-
     window.addEventListener('resize', measureActiveTab);
-    tabRowElement?.addEventListener('scroll', measureActiveTab);
 
     return () => {
       window.removeEventListener('resize', measureActiveTab);
-      tabRowElement?.removeEventListener('scroll', measureActiveTab);
     };
   }, [activeTab]);
 
@@ -124,7 +111,7 @@ const ReusableTabs = <T extends string>({
     const indicator = indicatorRef.current;
     if (!indicator) return;
 
-    const targetX = indicatorStyle.offset - 4;
+    const targetX = indicatorStyle.offset;
     const targetWidth = indicatorStyle.width;
 
     if (!didPlaceIndicatorRef.current) {
@@ -185,8 +172,8 @@ const ReusableTabs = <T extends string>({
       <div className={`w-full flex ${justifyClass}`}>
         <div
           ref={tabRowRef}
-          className={`scrollbar-thin scrollbar-thumb-[#10b981] scrollbar-track-gray-200 hover:scrollbar-thumb-[#10b98155] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)]  ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
-            : "bg-[#ffffff]  p-1 rounded-xl flex gap-2 relative overflow-x-auto"}`}
+          className={`scrollbar-thin scrollbar-thumb-[#10b981] scrollbar-track-gray-200 hover:scrollbar-thumb-[#10b98155] border border-base-color/10 w-full ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
+            : "bg-[#ffffff]  p-1 rounded-xl flex gap-2 relative overflow-x-auto "}`}
         >
           {tabs.map((tab) => {
             const clip = textClips[tab.value];
@@ -194,12 +181,14 @@ const ReusableTabs = <T extends string>({
             return (
               <button
                 key={tab.value}
+                data-tab-button={tab.value}
                 disabled={tab.disabled || false}
                 onClick={() => handleTabChange(tab.value)}
-                className="px-4 z-10 py-1.5 rounded-md bg-transparent font-medium text-sm sm:text-base transition-all disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-nowrap"
+                className="w-full px-4 z-10 py-1.5 rounded-md bg-transparent font-medium text-sm sm:text-base transition-all disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer text-nowrap"
               >
-                {/* tab-value sits on the text itself (not the padded button) so the
-                    pill measures and hugs only the label — no extra padding around it. */}
+                {/* data-tab-button (on the button) is what the pill measures, so it spans the
+                    tab's full width. tab-value stays on the text itself — it's only used to
+                    measure the label for the white-text wipe as the pill slides across it. */}
                 {variant === "bordered" ? (
                   <span
                     tab-value={tab.value}
@@ -229,7 +218,7 @@ const ReusableTabs = <T extends string>({
           })}
           <div
             ref={indicatorRef}
-            className={`${variant === "bordered" ? "indicator absolute bottom-1 top-1 border-b-2 border-secondary-color z-0" : "indicator absolute bottom-1 top-1 rounded-md bg-secondary-color z-0"} `}
+            className={`${variant === "bordered" ? "indicator absolute left-0 bottom-1 top-1 border-b-2 border-secondary-color z-0" : "indicator absolute left-0 bottom-1 top-1 rounded-md bg-secondary-color z-0"} `}
           />
         </div>
       </div>
