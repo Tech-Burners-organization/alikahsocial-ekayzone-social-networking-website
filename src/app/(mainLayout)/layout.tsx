@@ -20,7 +20,10 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div className="flex min-w-0 flex-1 flex-col">
                 <Topbar />
                 <div className="flex min-w-0 flex-1 bg-background-color">
-                    <main className="min-w-0 flex-1 h-[calc(100vh-56px)] overflow-y-auto scrollbar-none relative">{children}</main>
+                    {/* svh, not vh: on mobile 100vh is the URL-bar-retracted height, but
+                        the page itself never scrolls (main scrolls internally), so the bar
+                        never retracts and vh-sized content ends up hidden behind it. */}
+                    <main className="min-w-0 flex-1 h-[calc(100svh-56px)] overflow-y-auto scrollbar-none relative">{children}</main>
                     {!isFullWidth && <RightRail />}
                 </div>
             </div>

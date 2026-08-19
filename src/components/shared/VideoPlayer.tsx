@@ -218,7 +218,7 @@ function VideoPlayer({ item, isMuted, onMuteChange, volume, onVolumeChange, onAc
     const closeOverlay = () => setActiveOverlay(null);
 
     return (
-        <section data-reel-item="true" className="h-[calc(100vh-56px)] w-full snap-start snap-always relative flex items-center justify-center bg-zinc-950 font-sans select-none">
+        <section data-reel-item="true" className="h-full w-full snap-start snap-always relative flex items-center justify-center bg-zinc-950 font-sans select-none">
 
             {/*
         Responsive Outer Frame Container:

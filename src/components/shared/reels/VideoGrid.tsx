@@ -15,7 +15,7 @@ interface VideoGridProps {
 export function VideoGrid({
     items,
     href,
-    columnsClassName = "grid-cols-2 sm:grid-cols-3",
+    columnsClassName = " grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
     emptyMessage = "No posts yet",
 }: VideoGridProps) {
     if (items.length === 0) {

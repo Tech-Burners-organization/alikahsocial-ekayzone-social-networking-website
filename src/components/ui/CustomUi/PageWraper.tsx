@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import BackToPreviousPage from '@/utils/BackToPreviousPage';
+import Container from './Container';
 
 
 interface PageWraperProps {
@@ -13,17 +14,19 @@ interface PageWraperProps {
 
 const PageWraper: React.FC<PageWraperProps> = ({ className, title, children, backToPreviousPage, headerAction }) => {
     return (
-        <section className={cn("space-y-5 min-h-screen p-10", className)}>
-            <div className="flex items-center gap-4">
-                {backToPreviousPage && (
-                    <BackToPreviousPage />
+        <Container className='py-10'>
+            <section className={cn("space-y-5 min-h-screen", className)}>
+                <div className="flex items-center gap-4">
+                    {backToPreviousPage && (
+                        <BackToPreviousPage />
 
-                )}
-                <h1 className='text-2xl lg:text-3xl font-bold text-foreground'>{title}</h1>
-                {headerAction && <div className="ml-auto">{headerAction}</div>}
-            </div>
-            {children}
-        </section>
+                    )}
+                    <h1 className='text-2xl lg:text-3xl font-bold text-foreground'>{title}</h1>
+                    {headerAction && <div className="ml-auto">{headerAction}</div>}
+                </div>
+                {children}
+            </section>
+        </Container>
     );
 };
 

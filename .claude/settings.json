@@ -181,7 +181,8 @@
       "Bash(cd \"C:/Users/Din/.claude/skills/vercel-react-best-practices\" && ls && echo \"--- rules count ---\" && ls rules | wc -l)",
       "Read(//c/Users/Din/.claude/skills/vercel-react-best-practices/**)",
       "Read(//c/Users/Din/.claude/skills/vercel-react-best-practices/rules/**)",
-      "Bash(grep -v \"^\\\\s*$\")"
+      "Bash(grep -v \"^\\\\s*$\")",
+      "PowerShell(npx eslint \"src/components/shared/VideoPlayer.tsx\" \"src/components/shared/reels/BottomInfoBar.tsx\" \"src/app/\\(mainLayout\\)/layout.tsx\")"
     ],
     "additionalDirectories": [
       "D:\\Projects\\eKayzone_social_networking(alikahsocial)\\ekayzone_website\\src\\app\\(mainLayout)\\profile",

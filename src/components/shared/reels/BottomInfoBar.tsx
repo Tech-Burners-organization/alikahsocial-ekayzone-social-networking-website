@@ -10,8 +10,9 @@ interface BottomInfoBarProps {
 }
 
 export function BottomInfoBar({ username, isVerified, caption, hashtags, onAvatarClick }: BottomInfoBarProps) {
+    // The bottom padding clears the seek bar plus any iOS home indicator.
     return (
-        <div className="absolute bottom-0 left-0 right-0 px-4 pt-4 pb-6 bg-linear-to-t from-black/80 via-black/20 to-transparent pointer-events-none flex flex-col gap-3">
+        <div className="absolute bottom-0 left-0 right-0 px-4 pt-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] bg-linear-to-t from-black/80 via-black/20 to-transparent pointer-events-none flex flex-col gap-3">
             {/* Channel Info & Follow Action */}
             <div className="flex items-center gap-2 pointer-events-auto">
                 <button

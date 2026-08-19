@@ -23,7 +23,7 @@ export default function ProfilePageContent({ profile }: ProfilePageContentProps)
     return (
         <div>
             {/* ─── Profile Info ─────────────────────────── */}
-            <div className="relative z-10 -mt-16 mb-6 flex flex-col items-center px-4">
+            <div className="relative z-10  mb-6 flex flex-col items-center px-4">
                 {/* Avatar */}
                 <Avatar className="size-32 ring-4 ring-background shadow-lg mb-4">
                     <AvatarImage src={profile.avatarUrl} alt={profile.fullName} />
@@ -43,6 +43,21 @@ export default function ProfilePageContent({ profile }: ProfilePageContentProps)
                         )}
                     </div>
                     <p className="text-sm text-muted-foreground">@{profile.userName}</p>
+                </div>
+                {/* Stats */}
+                <div className="flex items-center gap-8 mb-5">
+                    <div className="text-center">
+                        <span className="block text-base font-bold text-foreground">
+                            {formatCompactNumber(profile.followingCount)}
+                        </span>
+                        <span className="text-xs text-muted-foreground">Following</span>
+                    </div>
+                    <div className="text-center">
+                        <span className="block text-base font-bold text-foreground">
+                            {formatCompactNumber(profile.followerCount)}
+                        </span>
+                        <span className="text-xs text-muted-foreground">Followers</span>
+                    </div>
                 </div>
 
                 {/* Bio */}
@@ -105,7 +120,7 @@ export default function ProfilePageContent({ profile }: ProfilePageContentProps)
             <VideoGrid
                 items={activeTab === "videos" ? profile.videos : profile.likedVideos}
                 href={`/profile/${profile.userName}/watch`}
-                columnsClassName="grid-cols-3"
+                columnsClassName="grid-cols-2 md:grid-cols-3"
             />
         </div>
     );

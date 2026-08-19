@@ -11,7 +11,7 @@ export function FollowButton() {
       type="button"
       onClick={() => setFollowing((prev) => !prev)}
       className={cn(
-        "shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition-colors",
+        "shrink-0 rounded-full px-4 py-1.5 text-base font-semibold transition-colors",
         following
           ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
           : "bg-secondary-color text-white hover:bg-secondary-color/90"
