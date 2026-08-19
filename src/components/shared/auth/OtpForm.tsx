@@ -77,12 +77,12 @@ export default function OtpForm({ description, onVerify, onVerified, onResend, s
                     name="code"
                     render={({ field }) => (
                         <InputOTP maxLength={6} value={field.value} onChange={field.onChange}>
-                            <InputOTPGroup className="w-full justify-between gap-2">
+                            <InputOTPGroup className="w-full justify-evenly gap-2">
                                 {Array.from({ length: 6 }).map((_, index) => (
                                     <InputOTPSlot
                                         key={index}
                                         index={index}
-                                        className="h-16 w-14 rounded-lg! border! border-black/[0.06]! text-2xl! font-bold data-[active=true]:border-secondary-color!"
+                                        className="lg:h-20 lg:w-20 h-14 w-14 rounded-lg! border! border-secondary-color/50! text-2xl! font-bold data-[active=true]:border-secondary-color!"
                                     />
                                 ))}
                             </InputOTPGroup>

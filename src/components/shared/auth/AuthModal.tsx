@@ -26,7 +26,10 @@ export default function AuthModal() {
     const { isOpen, close, view } = useAuthModal();
 
     return (
-        <ReusableModal open={isOpen} onOpenChange={(open) => !open && close()} title={TITLES[view]} maxWidth="sm:max-w-lg">
+        <ReusableModal open={isOpen} onOpenChange={(open) => !open && close()} title={""} maxWidth="sm:max-w-lg">
+            <div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl text-base-color font-bold text-center mb-10">{TITLES[view]}</h2>
+            </div>
             {view === "login" && <LoginView />}
             {view === "signup-method" && <SignupMethodView />}
             {view === "signup-form" && <SignupFormView />}
