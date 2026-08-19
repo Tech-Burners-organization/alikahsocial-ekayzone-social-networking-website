@@ -19,6 +19,8 @@ type ReusableTabsProps<T extends string> = {
   activeTab: T;
   align?: "left" | "center" | "right";
   resetPage?: boolean;
+  /** Query params to drop when switching tabs — e.g. a `search` or filter that only makes sense on the tab it was set from. */
+  resetParams?: string[];
   tabContentStyle?: string;
   tabName?: string;
   variant?: "default" | "bordered";
@@ -29,6 +31,7 @@ const ReusableTabs = <T extends string>({
   activeTab,
   align = "center",
   resetPage = false,
+  resetParams,
   tabContentStyle = "",
   tabName = "tab",
   variant = "default",
@@ -158,6 +161,7 @@ const ReusableTabs = <T extends string>({
         params.set("page", "1");
         params.delete("search");
       }
+      resetParams?.forEach((key) => params.delete(key));
     } else {
       params.delete(tabName);
     }
@@ -172,8 +176,8 @@ const ReusableTabs = <T extends string>({
       <div className={`w-full flex ${justifyClass}`}>
         <div
           ref={tabRowRef}
-          className={`scrollbar-thin scrollbar-thumb-[#10b981] scrollbar-track-gray-200 hover:scrollbar-thumb-[#10b98155] border border-base-color/10 w-full ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
-            : "bg-[#ffffff]  p-1 rounded-xl flex gap-2 relative overflow-x-auto "}`}
+          className={`scrollbar-thin scrollbar-thumb-[#10b981] scrollbar-track-gray-200 hover:scrollbar-thumb-[#10b98155] w-full ${variant === "bordered" ? " p-1 rounded-xl flex gap-2 relative overflow-x-auto"
+            : "bg-[#ffffff]  p-1 rounded-xl flex gap-2 relative overflow-x-auto  border border-base-color/10"}`}
         >
           {tabs.map((tab) => {
             const clip = textClips[tab.value];

@@ -13,10 +13,17 @@ export default function ShopOrderCard({ order }: { order: ShopOrder }) {
     return (
         <Link
             href={`/profile/shop/orders/${order.id}`}
-            className="flex items-end gap-4 rounded-xl border border-[#e5e8ea] bg-white p-2.5 transition-colors hover:border-secondary-color/40"
+            className="flex flex-col gap-4 rounded-xl border border-[#e5e8ea] bg-white p-2.5 transition-colors hover:border-secondary-color/40 md:flex-row md:items-end"
         >
-            <div className="relative h-[103px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-muted">
-                <Image src={order.image} alt={order.title} fill sizes="100px" className="object-cover" />
+            {/* Below md the card stacks: full-bleed image on top, then the order details. */}
+            <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-25.75 md:w-25">
+                <Image
+                    src={order.image}
+                    alt={order.title}
+                    fill
+                    sizes="(min-width: 768px) 100px, 100vw"
+                    className="object-cover"
+                />
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col gap-1.5">

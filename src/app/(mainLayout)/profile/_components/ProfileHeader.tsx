@@ -8,7 +8,7 @@ interface ProfileHeaderProps {
 export default function ProfileHeader({ profile }: ProfileHeaderProps) {
     return (
         <div className="relative">
-            <div className="relative aspect-[850/264] w-full overflow-hidden rounded-[26px] bg-muted">
+            <div className="relative aspect-video md:aspect-[600/264] w-full overflow-hidden rounded-[26px] bg-muted">
                 <Image
                     src={profile.coverUrl}
                     alt=""
@@ -20,7 +20,7 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
             </div>
 
             <div className="absolute -bottom-10 left-6">
-                <div className="relative size-[99px] overflow-hidden rounded-full bg-muted ring-4 ring-background">
+                <div className="relative size-[99px] overflow-hidden rounded-full bg-muted ring-4 ring-secondary-color">
                     <Image src={profile.avatarUrl} alt={profile.fullName} fill sizes="99px" className="object-cover" />
                 </div>
                 {profile.isPro && (

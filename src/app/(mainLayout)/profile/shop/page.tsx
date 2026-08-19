@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageWraper from "@/components/ui/CustomUi/PageWraper";
-import PillSwitcher from "@/components/shared/PillSwitcher";
+import ReusableTabs from "@/components/ui/CustomUi/ReusableTabs";
 import OverviewPanel from "./_components/OverviewPanel";
 import OrdersPanel from "./_components/OrdersPanel";
 import ListingsPanel from "./_components/ListingsPanel";
@@ -39,30 +39,34 @@ export default async function MyShopPage({ searchParams }: PageProps<"/profile/s
 
     return (
         <PageWraper title="My Shop" backToPreviousPage>
-            <div className="flex flex-col gap-5">
-                <PillSwitcher<ShopTab>
-                    items={SHOP_TABS.map((shopTab) => ({ label: shopTab.label, value: shopTab.value }))}
-                    activeValue={tab}
-                    param="tab"
-                    basePath="/profile/shop"
-                    searchParams={params}
-                    resetParams={["search", "reviewFilter", "reviewSort"]}
-                    variant="primary"
-                />
-
-                {tab === "overview" && <OverviewPanel />}
-                {tab === "orders" && <OrdersPanel search={search} mode="orders" />}
-                {tab === "bookings" && <OrdersPanel search={search} mode="bookings" />}
-                {tab === "listings" && <ListingsPanel search={search} />}
-                {tab === "ratings" && (
-                    <RatingsPanel
-                        filter={reviewFilter}
-                        sort={reviewSort}
-                        search={search}
-                        searchParams={params}
-                    />
-                )}
-            </div>
+            <ReusableTabs<ShopTab>
+                activeTab={tab}
+                tabName="tab"
+                align="center"
+                tabContentStyle="mt-5"
+                resetParams={["search", "reviewFilter", "reviewSort"]}
+                tabs={SHOP_TABS.map((shopTab) => ({
+                    label: shopTab.label,
+                    value: shopTab.value,
+                    content:
+                        shopTab.value === "overview" ? (
+                            <OverviewPanel />
+                        ) : shopTab.value === "orders" ? (
+                            <OrdersPanel search={search} mode="orders" />
+                        ) : shopTab.value === "bookings" ? (
+                            <OrdersPanel search={search} mode="bookings" />
+                        ) : shopTab.value === "listings" ? (
+                            <ListingsPanel search={search} />
+                        ) : (
+                            <RatingsPanel
+                                filter={reviewFilter}
+                                sort={reviewSort}
+                                search={search}
+                                searchParams={params}
+                            />
+                        ),
+                }))}
+            />
         </PageWraper>
     );
 }

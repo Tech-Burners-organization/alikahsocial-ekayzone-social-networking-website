@@ -32,7 +32,7 @@ export default async function CreatorStudioPage({ searchParams }: PageProps<"/pr
                 activeTab={tab}
                 tabName="tab"
                 align="center"
-                tabContentStyle="mt-6 max-w-3xl mx-auto"
+                tabContentStyle="mt-6"
                 tabs={CREATOR_STUDIO_TABS.map((studioTab) => ({
                     label: studioTab.label,
                     value: studioTab.value,

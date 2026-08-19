@@ -35,18 +35,27 @@ export default function PastStreamsList({ streams }: { streams: PastStreamItem[]
                 {filtered.map((stream) => (
                     <div
                         key={stream.id}
-                        className="flex items-center gap-2.5 rounded-xl border border-border bg-background p-2.5 shadow-[0px_1px_0.5px_rgba(0,0,0,0.03)]"
+                        className="flex flex-col gap-2.5 rounded-xl border border-border bg-background p-2.5 shadow-[0px_1px_0.5px_rgba(0,0,0,0.03)] md:flex-row md:items-center"
                     >
-                        <div className="relative h-28.5 w-27 shrink-0 overflow-hidden rounded-xl bg-muted">
-                            <Image src={stream.thumbnailUrl} alt={stream.title} fill sizes="108px" className="object-cover" />
+                        {/* Below md the card stacks: full-bleed thumbnail on top, then the details. */}
+                        <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-xl bg-muted md:h-28.5 md:w-27">
+                            <Image
+                                src={stream.thumbnailUrl}
+                                alt={stream.title}
+                                fill
+                                sizes="(min-width: 768px) 108px, 100vw"
+                                className="object-cover"
+                            />
                         </div>
                         <div className="flex flex-col items-start gap-2">
                             <div className="flex flex-col gap-1">
                                 <p className="text-lg font-bold text-foreground">{stream.title}</p>
-                                <div className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
-                                    <span>{stream.publishedAt}</span>
-                                    <span className="size-1 rounded-full bg-muted-foreground" />
-                                    <span>{stream.durationLabel}</span>
+                                {/* nowrap spans + a wrapping row keep the date and duration whole,
+                                    so the separator dot never ends up stranded between two lines. */}
+                                <div className="flex flex-wrap items-center gap-1 text-sm font-medium text-muted-foreground">
+                                    <span className="whitespace-nowrap">{stream.publishedAt}</span>
+                                    <span className="size-1 shrink-0 rounded-full bg-muted-foreground" />
+                                    <span className="whitespace-nowrap">{stream.durationLabel}</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">

@@ -23,13 +23,14 @@ export default function MyOrderCard({ order }: { order: BuyerOrder }) {
     return (
         <article className="flex flex-col gap-[7px] rounded-xl border border-[#e5e8ea] bg-white p-2.5">
             <div className="flex w-full flex-col items-center gap-[18px]">
-                <div className="flex w-full items-end gap-4">
-                    <div className="relative h-[103px] w-[100px] shrink-0 overflow-hidden rounded-lg bg-muted">
+                {/* Below md the card stacks: full-bleed image on top, then the order details. */}
+                <div className="flex w-full flex-col gap-4 md:flex-row md:items-end">
+                    <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-25.75 md:w-25">
                         <Image
                             src={order.image}
                             alt={order.title}
                             fill
-                            sizes="100px"
+                            sizes="(min-width: 768px) 100px, 100vw"
                             className="object-cover"
                         />
                     </div>

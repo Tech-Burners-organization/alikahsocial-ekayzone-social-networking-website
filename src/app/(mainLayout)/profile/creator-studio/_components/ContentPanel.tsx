@@ -17,15 +17,24 @@ export default function ContentPanel({ sort }: { sort: VideoSort }) {
                 {videos.map((video) => (
                     <div
                         key={video.id}
-                        className="flex items-center gap-2.5 rounded-xl border border-border bg-background p-2.5 shadow-[0px_1px_0.5px_rgba(0,0,0,0.03)]"
+                        className="flex flex-col gap-2.5 rounded-xl border border-border bg-background p-2.5 shadow-[0px_1px_0.5px_rgba(0,0,0,0.03)] md:flex-row md:items-center"
                     >
-                        <div className="relative h-29.75 w-26.5 shrink-0 overflow-hidden rounded-lg bg-muted">
-                            <Image src={video.thumbnailUrl} alt={video.title} fill sizes="106px" className="object-cover" />
+                        {/* Below md the card stacks: full-bleed thumbnail on top, then the title and stats. */}
+                        <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-29.75 md:w-26.5">
+                            <Image
+                                src={video.thumbnailUrl}
+                                alt={video.title}
+                                fill
+                                sizes="(min-width: 768px) 106px, 100vw"
+                                className="object-cover"
+                            />
                             <div className="absolute inset-0 bg-black/20" />
                         </div>
                         <div className="flex flex-1 flex-col gap-4">
                             <p className="text-xl font-bold text-foreground">{video.title}</p>
-                            <div className="flex items-center gap-6">
+                            {/* Spread across the full width on mobile so the four stats fit
+                                without clipping; left-packed at md+ as designed. */}
+                            <div className="flex items-center justify-between gap-4 md:justify-start md:gap-6">
                                 <div className="flex flex-col items-center gap-0.5">
                                     <span className="text-sm font-medium text-muted-foreground">Views</span>
                                     <span className="text-lg font-bold text-foreground">
